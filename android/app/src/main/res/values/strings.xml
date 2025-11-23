@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">StaticFund</string>
+    <string name="title_activity_main">StaticFund</string>
+    <string name="package_name">com.staticfund.app</string>
+    <string name="custom_url_scheme">com.staticfund.app</string>
+</resources>
