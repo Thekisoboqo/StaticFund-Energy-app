@@ -1,10 +1,71 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Clock, Thermometer, Lightbulb, Battery, ChevronRight } from 'lucide-react';
 
-const Insights = ({ devices }) => {
-    // Mock calculation for demo purposes to match wireframe
-    const totalLoad = devices.reduce((acc, device) => acc + (device.watts * (device.hours || 0)), 0) / 1000;
-    const estBill = 150; // Hardcoded for demo match
+const Insights = ({ devices, electricityRate = 0.15 }) => {
+    // Calculate total daily kWh and estimated monthly bill
+    const { estBill, deviceCosts } = useMemo(() => {
+        const costs = devices.map(device => {
+            const dailykWh = (device.watts * (device.hours || 0)) / 1000;
+            return {
+                ...device,
+                dailykWh,
+                monthlyCost: dailykWh * 30 * electricityRate
+            };
+        });
+
+        const calculatedTotalDailykWh = costs.reduce((acc, device) => acc + device.dailykWh, 0);
+        const bill = calculatedTotalDailykWh * 30 * electricityRate;
+
+        // Sort by cost descending
+        costs.sort((a, b) => b.monthlyCost - a.monthlyCost);
+
+        return { estBill: bill, deviceCosts: costs };
+    }, [devices, electricityRate]);
+
+    // Prepare data for the donut chart (Top 2 + Others)
+    const chartData = useMemo(() => {
+        if (deviceCosts.length === 0) return [];
+
+        const topDevices = deviceCosts.slice(0, 2);
+        const otherDevices = deviceCosts.slice(2);
+
+        const data = topDevices.map(d => ({
+            label: d.name,
+            value: d.monthlyCost,
+            color: '' // Assigned below
+        }));
+
+        if (otherDevices.length > 0) {
+            const otherCost = otherDevices.reduce((acc, d) => acc + d.monthlyCost, 0);
+            data.push({
+                label: 'Other',
+                value: otherCost,
+                color: '' // Assigned below
+            });
+        }
+
+        // Assign colors
+        const colors = ['#FCD34D', '#6EE7B7', '#93C5FD'];
+        data.forEach((d, i) => d.color = colors[i % colors.length]);
+
+        return data;
+    }, [deviceCosts]);
+
+    // Generate conic-gradient string
+    const gradientString = useMemo(() => {
+        if (estBill === 0) return 'conic-gradient(#E5E7EB 0% 100%)';
+
+        let currentPercent = 0;
+        const segments = chartData.map(d => {
+            const percent = (d.value / estBill) * 100;
+            const start = currentPercent;
+            currentPercent += percent;
+            return `${d.color} ${start}% ${currentPercent}%`;
+        });
+
+        return `conic-gradient(${segments.join(', ')})`;
+    }, [chartData, estBill]);
+
 
     return (
         <div>
@@ -18,7 +79,7 @@ const Insights = ({ devices }) => {
                         width: '200px',
                         height: '200px',
                         borderRadius: '50%',
-                        background: 'conic-gradient(#FCD34D 0% 35%, #6EE7B7 35% 65%, #93C5FD 65% 100%)',
+                        background: gradientString,
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
@@ -37,23 +98,30 @@ const Insights = ({ devices }) => {
                             zIndex: 10
                         }}>
                             <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginBottom: '0.25rem' }}>Estimated<br />Monthly Bill:</div>
-                            <div style={{ fontSize: '1.5rem', fontWeight: 800 }}>${estBill}</div>
+                            <div style={{ fontSize: '1.5rem', fontWeight: 800 }}>${estBill.toFixed(2)}</div>
                         </div>
                     </div>
 
-                    {/* Labels (Absolute positioned for demo layout) */}
-                    <div style={{ position: 'absolute', top: '10%', right: '-10px', textAlign: 'left' }}>
-                        <div style={{ fontWeight: 600 }}>Heating</div>
-                        <div style={{ fontWeight: 700 }}>$50</div>
-                    </div>
-                    <div style={{ position: 'absolute', bottom: '20%', right: '-10px', textAlign: 'left' }}>
-                        <div style={{ fontWeight: 600 }}>Cooking</div>
-                        <div style={{ fontWeight: 700 }}>$40</div>
-                    </div>
-                    <div style={{ position: 'absolute', top: '40%', left: '-10px', textAlign: 'right' }}>
-                        <div style={{ fontWeight: 600 }}>Other</div>
-                        <div style={{ fontWeight: 700 }}>$60</div>
-                    </div>
+                    {/* Labels (Dynamically positioned based on fixed slots for simplicity, or just listed on side/corners) */}
+                    {/* For this implementation, I will map the top 3 items to the fixed positions if available, otherwise hide */}
+                    {chartData[0] && (
+                         <div style={{ position: 'absolute', top: '10%', right: '-10px', textAlign: 'left' }}>
+                            <div style={{ fontWeight: 600 }}>{chartData[0].label}</div>
+                            <div style={{ fontWeight: 700 }}>${chartData[0].value.toFixed(2)}</div>
+                        </div>
+                    )}
+                    {chartData[1] && (
+                        <div style={{ position: 'absolute', bottom: '20%', right: '-10px', textAlign: 'left' }}>
+                            <div style={{ fontWeight: 600 }}>{chartData[1].label}</div>
+                            <div style={{ fontWeight: 700 }}>${chartData[1].value.toFixed(2)}</div>
+                        </div>
+                    )}
+                    {chartData[2] && (
+                        <div style={{ position: 'absolute', top: '40%', left: '-10px', textAlign: 'right' }}>
+                            <div style={{ fontWeight: 600 }}>{chartData[2].label}</div>
+                            <div style={{ fontWeight: 700 }}>${chartData[2].value.toFixed(2)}</div>
+                        </div>
+                    )}
                 </div>
 
                 <h3 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '1rem' }}>Top Savings Opportunities</h3>
@@ -116,7 +184,7 @@ const Insights = ({ devices }) => {
                 {/* Goal Card */}
                 <div className="card" style={{ display: 'flex', gap: '1rem', alignItems: 'center', marginTop: '1rem' }}>
                     <div style={{ position: 'relative' }}>
-                        <Sun size={32} color="#F59E0B" />
+                        <GoalIcon size={32} color="#F59E0B" />
                         <div style={{ position: 'absolute', bottom: -5, right: -5, background: '#10B981', borderRadius: '50%', padding: '2px' }}>
                             <Battery size={12} color="white" />
                         </div>
@@ -135,7 +203,7 @@ const Insights = ({ devices }) => {
 };
 
 // Simple Sun icon component if not imported (but it is)
-const Sun = ({ size, color }) => (
+const GoalIcon = ({ size, color }) => (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="12" cy="12" r="5"></circle>
         <line x1="12" y1="1" x2="12" y2="3"></line>
