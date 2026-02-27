@@ -1,16 +1,52 @@
 import React, { useState } from 'react';
-import { Camera, ChevronRight, Refrigerator, Tv, Zap, CheckCircle } from 'lucide-react';
+import { Camera, ChevronRight, Refrigerator, Tv, Zap, CheckCircle, Search as SearchIcon } from 'lucide-react';
+import memoryService from '../services/memoryService';
 
 const Inventory = ({ devices, onAdd, onRemove }) => {
     const [name, setName] = useState('');
     const [watts, setWatts] = useState('');
     const [isAdding, setIsAdding] = useState(false);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [searchResults, setSearchResults] = useState([]);
+
+    const handleSearch = async (e) => {
+        const query = e.target.value;
+        setSearchQuery(query);
+        if (query.trim()) {
+            const results = await memoryService.query(query);
+            setSearchResults(results);
+        } else {
+            setSearchResults([]);
+        }
+    };
+
+    const simulateVisionScan = async () => {
+        // Simulate scanning an appliance and extracting data using a Vision model
+        const mockScannedAppliance = { name: 'Smart Toaster', watts: 800 };
+        setName(mockScannedAppliance.name);
+        setWatts(mockScannedAppliance.watts.toString());
+        setIsAdding(true);
+
+        // Store this "scan" in the mock memory service simulating Nemotron Embed
+        await memoryService.store({
+            text: `Scanned image of a ${mockScannedAppliance.name}. Wattage tag: ${mockScannedAppliance.watts}W.`,
+            metadata: { type: 'appliance_scan', name: mockScannedAppliance.name, watts: mockScannedAppliance.watts }
+        });
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
         const parsedWatts = parseInt(watts);
         if (!name.trim() || !watts || parsedWatts <= 0) return;
+
         onAdd({ name: name.trim(), watts: parsedWatts });
+
+        // Also manually adding stores memory (if they type it)
+        memoryService.store({
+            text: `Manually added ${name.trim()} using ${parsedWatts}W.`,
+            metadata: { type: 'appliance_manual', name: name.trim(), watts: parsedWatts }
+        });
+
         setName('');
         setWatts('');
         setIsAdding(false);
@@ -29,6 +65,32 @@ const Inventory = ({ devices, onAdd, onRemove }) => {
             <div className="sub-header">Let's build your energy profile together.</div>
 
             <div style={{ padding: '0 1.5rem 1.5rem' }}>
+
+                {/* Memory Search */}
+                <div style={{ marginBottom: '1.5rem', position: 'relative' }}>
+                    <div style={{ position: 'absolute', top: '12px', left: '12px', color: 'var(--text-secondary)' }}>
+                        <SearchIcon size={20} />
+                    </div>
+                    <input
+                        type="text"
+                        className="input-field"
+                        placeholder="Search Memory (Llama Nemotron Embed)..."
+                        value={searchQuery}
+                        onChange={handleSearch}
+                        style={{ paddingLeft: '2.5rem' }}
+                    />
+                    {searchResults.length > 0 && (
+                        <div className="card" style={{ position: 'absolute', top: '100%', left: 0, right: 0, zIndex: 10, marginTop: '0.5rem', padding: '0.5rem' }}>
+                            <div style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '0.5rem' }}>Memory Results:</div>
+                            {searchResults.map((res, i) => (
+                                <div key={i} style={{ fontSize: '0.875rem', padding: '0.5rem', borderBottom: '1px solid var(--border)' }}>
+                                    {res.text}
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                </div>
+
                 {/* Scan Card */}
                 {!isAdding ? (
                     <div
@@ -44,7 +106,7 @@ const Inventory = ({ devices, onAdd, onRemove }) => {
                             position: 'relative',
                             overflow: 'hidden'
                         }}
-                        onClick={() => setIsAdding(true)}
+                        onClick={simulateVisionScan}
                     >
                         {/* Decorative circle */}
                         <div style={{ position: 'absolute', top: '-20px', right: '-20px', width: '100px', height: '100px', borderRadius: '50%', background: 'rgba(255,255,255,0.2)' }} />

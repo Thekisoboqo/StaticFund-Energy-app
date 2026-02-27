@@ -4,9 +4,10 @@ import Inventory from './screens/Inventory';
 import Audit from './screens/Audit';
 import Insights from './screens/Insights';
 import Settings from './screens/Settings';
+import Dashboard from './screens/Dashboard';
 
 function App() {
-  const [activeScreen, setActiveScreen] = useState('inventory');
+  const [activeScreen, setActiveScreen] = useState('dashboard');
 
   // Initialize devices from localStorage or default
   const [devices, setDevices] = useState(() => {
@@ -46,6 +47,8 @@ function App() {
 
   const renderScreen = () => {
     switch (activeScreen) {
+      case 'dashboard':
+        return <Dashboard />;
       case 'inventory':
         return (
           <Inventory
