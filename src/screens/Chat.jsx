@@ -77,12 +77,12 @@ const Chat = () => {
             </div>
 
             <div style={{
-                position: 'fixed',
-                bottom: '80px', // Above the navigation bar
+                position: 'absolute',
+                bottom: '72px', // Above the navigation bar (nav bar height approx 70px)
                 left: 0,
                 right: 0,
                 padding: '1rem',
-                backgroundColor: 'var(--bg-color)',
+                backgroundColor: 'var(--bg-card)',
                 borderTop: '1px solid var(--border)',
                 display: 'flex',
                 gap: '0.5rem',

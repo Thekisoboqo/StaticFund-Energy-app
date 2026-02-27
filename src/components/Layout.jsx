@@ -5,7 +5,7 @@ const Layout = ({ children, activeScreen, onScreenChange }) => {
     // We update navigation items to match the screenshot bottom bar: Home, Scan, [Shield], Stats, Profile
     return (
         <div className="container">
-            <div className="content" style={{ paddingBottom: '80px' }}>
+            <div className="content" style={{ paddingBottom: '144px' }}>
                 {children}
             </div>
 
