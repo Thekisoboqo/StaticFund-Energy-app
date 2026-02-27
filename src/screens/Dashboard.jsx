@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Activity, ShieldCheck, Zap, CloudLightning, Eye, Bell, Globe, Clock, DollarSign, Flame, TrendingUp, Users, CheckCircle, Building } from 'lucide-react';
 import memoryService from '../services/memoryService';
 import { apiService } from '../services/api';
+import { inverterService } from '../services/inverterService';
 
-const Dashboard = () => {
+const Dashboard = ({ inverterConfig }) => {
     const [recentMemories, setRecentMemories] = useState([]);
     const [applyingB2B, setApplyingB2B] = useState(false);
     const [leadResult, setLeadResult] = useState(null);
@@ -14,6 +15,40 @@ const Dashboard = () => {
         gamification: 'Loading...',
         community: 'Loading...',
     });
+    const [inverterData, setInverterData] = useState(null);
+
+    // Inverter Telemetry Polling
+    useEffect(() => {
+        let isMounted = true;
+        let timeoutId;
+
+        const pollInverter = async () => {
+            if (inverterConfig && inverterConfig.brand && inverterConfig.plantId) {
+                try {
+                    const data = await inverterService.getTelemetry(inverterConfig);
+                    if (isMounted) {
+                        setInverterData(data);
+                    }
+                } catch (err) {
+                    console.error("Failed to poll inverter:", err);
+                }
+            } else {
+                setInverterData(null);
+            }
+
+            // Poll every 5 seconds if mounted
+            if (isMounted && inverterConfig && inverterConfig.brand) {
+                timeoutId = setTimeout(pollInverter, 5000);
+            }
+        };
+
+        pollInverter();
+
+        return () => {
+            isMounted = false;
+            clearTimeout(timeoutId);
+        };
+    }, [inverterConfig]);
 
     const handleApplyForSolar = async () => {
         setApplyingB2B(true);
@@ -105,6 +140,16 @@ const Dashboard = () => {
             color: '#8B5CF6',
             bgColor: '#EDE9FE',
             content: dashboardData.weatherForecast,
+        },
+        {
+            title: 'Inverter Telemetry',
+            agent: 'Solar & Inverter Agent',
+            icon: Activity,
+            color: '#3B82F6',
+            bgColor: '#DBEAFE',
+            content: inverterData ?
+                `SOC: ${inverterData.battery_soc}%. PV: ${inverterData.pv_watts}W. Grid: ${inverterData.grid_draw_watts}W. Load: ${inverterData.load_watts}W.` :
+                'No inverter configured. Add one in Settings.',
         },
         {
             title: 'Vision Status',

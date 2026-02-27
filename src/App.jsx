@@ -5,6 +5,7 @@ import Audit from './screens/Audit';
 import Insights from './screens/Insights';
 import Settings from './screens/Settings';
 import Dashboard from './screens/Dashboard';
+import Chat from './screens/Chat';
 
 function App() {
   const [activeScreen, setActiveScreen] = useState('dashboard');
@@ -25,9 +26,19 @@ function App() {
     return saved ? parseFloat(saved) : 0.15;
   });
 
+  // Initialize inverter config
+  const [inverterConfig, setInverterConfig] = useState(() => {
+    const saved = localStorage.getItem('inverterConfig');
+    return saved ? JSON.parse(saved) : { brand: '', plantId: '', username: '', password: '' };
+  });
+
   useEffect(() => {
     localStorage.setItem('devices', JSON.stringify(devices));
   }, [devices]);
+
+  useEffect(() => {
+    localStorage.setItem('inverterConfig', JSON.stringify(inverterConfig));
+  }, [inverterConfig]);
 
   useEffect(() => {
     localStorage.setItem('electricityRate', electricityRate);
@@ -48,7 +59,9 @@ function App() {
   const renderScreen = () => {
     switch (activeScreen) {
       case 'dashboard':
-        return <Dashboard />;
+        return <Dashboard inverterConfig={inverterConfig} />;
+      case 'chat':
+        return <Chat />;
       case 'inventory':
         return (
           <Inventory
@@ -63,7 +76,14 @@ function App() {
       case 'insights':
         return <Insights devices={devices} electricityRate={electricityRate} />;
       case 'settings':
-        return <Settings electricityRate={electricityRate} setElectricityRate={setElectricityRate} />;
+        return (
+          <Settings
+            electricityRate={electricityRate}
+            setElectricityRate={setElectricityRate}
+            inverterConfig={inverterConfig}
+            setInverterConfig={setInverterConfig}
+          />
+        );
       default:
         return <Inventory />;
     }

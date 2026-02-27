@@ -1,12 +1,13 @@
 import React from 'react';
-import { Home, Briefcase, Search, BarChart3, Settings } from 'lucide-react';
+import { LayoutDashboard, Target, PieChart, Settings, ListPlus, MessageCircle } from 'lucide-react';
 
 const Layout = ({ children, activeScreen, onScreenChange }) => {
     const navItems = [
-        { id: 'dashboard', label: 'Dashboard', icon: Home },
-        { id: 'inventory', label: 'Inventory', icon: Briefcase },
-        { id: 'audit', label: 'Audit', icon: Search },
-        { id: 'insights', label: 'Insights', icon: BarChart3 },
+        { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
+        { id: 'inventory', label: 'Inventory', icon: ListPlus },
+        { id: 'chat', label: 'Chat', icon: MessageCircle },
+        { id: 'audit', label: 'Audit', icon: Target },
+        { id: 'insights', label: 'Insights', icon: PieChart },
         { id: 'settings', label: 'Settings', icon: Settings },
     ];
 
