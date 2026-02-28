@@ -1,26 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap');
 
 :root {
-  /* Pastel Palette */
-  --bg-primary: #FFFBEB;
-  /* Cream */
-  --bg-card: #FFFFFF;
-  --bg-mint: #ECFDF5;
-  --bg-blue: #E0F2FE;
-  --bg-orange: #FEF3C7;
+  /* Privacy Filter Agent Dark Theme */
+  --bg-primary: #111C1A; /* Very Dark Green/Grey */
+  --bg-card: #1A2724; /* Slightly lighter for contrast */
+  --bg-mint: #15332A; /* Dark Mint Tint */
+  --bg-blue: #132431;
+  --bg-orange: #2C2216;
 
-  --text-primary: #1F2937;
-  --text-secondary: #6B7280;
-  --text-brand: #065F46;
-  /* Dark Mint */
+  --text-primary: #E5E7EB; /* Light Grey/White */
+  --text-secondary: #9CA3AF; /* Medium Grey */
+  --text-brand: #0CD3AD; /* Bright Cyan/Teal Accent */
 
-  --accent: #10B981;
-  --accent-hover: #059669;
+  --accent: #0CD3AD;
+  --accent-hover: #09A98A;
 
-  --border: #F3F4F6;
+  --border: #2D3D39; /* Dark border */
 
   --font-sans: 'Outfit', sans-serif;
-  /* More friendly/rounded font */
 
   --radius-sm: 0.5rem;
   --radius-md: 1rem;
@@ -41,8 +38,7 @@
 
 body {
   font-family: var(--font-sans);
-  background-color: #F9FAFB;
-  /* Outer background */
+  background-color: #0A0F0E;
   color: var(--text-primary);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
@@ -53,10 +49,12 @@ button {
   border: none;
   background: none;
   font-family: inherit;
+  color: var(--text-primary);
 }
 
 input {
   font-family: inherit;
+  color: var(--text-primary);
 }
 
 /* Utilities */
@@ -65,10 +63,12 @@ input {
   margin: 0 auto;
   background-color: var(--bg-primary);
   min-height: 100vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   box-shadow: var(--shadow-lg);
   position: relative;
+  overflow: hidden;
 }
 
 .header {
@@ -87,11 +87,15 @@ input {
 
 .content {
   flex: 1;
-  padding: 1rem 1.5rem;
   overflow-y: auto;
+  position: relative;
+}
+
+/* Make inner elements take up the full scroll area so they don't break flex layout */
+.content > div {
+  min-height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
 }
 
 .btn {
@@ -125,25 +129,30 @@ input {
 }
 
 .card-blue {
-  background: linear-gradient(135deg, #E0F2FE 0%, #BAE6FD 100%);
-  color: #0369A1;
+  background: linear-gradient(135deg, #132431 0%, #1A3649 100%);
+  color: #38BDF8;
   border: none;
 }
 
 .card-mint {
   background-color: var(--bg-mint);
-  border: 1px solid #D1FAE5;
+  border: 1px solid #1E4D40;
 }
 
 /* Navigation */
 .nav-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
   display: flex;
   justify-content: space-around;
   padding: 1rem;
   background-color: var(--bg-card);
   border-top: 1px solid var(--border);
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-  box-shadow: 0 -4px 6px -1px rgb(0 0 0 / 0.05);
+  box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.3);
+  z-index: 50;
 }
 
 .nav-item {
@@ -196,7 +205,7 @@ input[type=range]::-webkit-slider-thumb {
   height: 20px;
   width: 20px;
   border-radius: 50%;
-  background: #FFFFFF;
+  background: var(--bg-card);
   border: 2px solid var(--accent);
   cursor: pointer;
   margin-top: -8px;
@@ -207,10 +216,10 @@ input[type=range]::-webkit-slider-runnable-track {
   width: 100%;
   height: 4px;
   cursor: pointer;
-  background: #E5E7EB;
+  background: var(--border);
   border-radius: 2px;
 }
 
 input[type=range]:focus::-webkit-slider-runnable-track {
-  background: #D1FAE5;
+  background: var(--bg-mint);
 }

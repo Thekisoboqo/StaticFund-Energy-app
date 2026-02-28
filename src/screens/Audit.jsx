@@ -22,30 +22,31 @@ const Audit = ({ devices, onUpdate, onScreenChange }) => {
     };
 
     return (
-        <div>
+        <div style={{ paddingBottom: '80px', flex: 1 }}>
             <div className="header">Daily Habits</div>
             <div className="sub-header">Tell us how you use your devices.</div>
 
-            <div className="content">
+            <div style={{ padding: '0 1.5rem 1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem', flex: 1 }}>
                 {devices.map((device) => (
                     <div key={device.id} className="card card-mint" style={{ padding: '1.5rem' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
                             <div style={{
                                 width: '40px',
                                 height: '40px',
-                                backgroundColor: 'white',
+                                backgroundColor: 'var(--bg-card)',
                                 borderRadius: '8px',
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
                                 color: 'var(--text-brand)',
-                                boxShadow: 'var(--shadow-sm)'
+                                boxShadow: 'var(--shadow-sm)',
+                                border: '1px solid var(--border)'
                             }}>
                                 {getIcon(device.name)}
                             </div>
                             <div style={{ flex: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                                <span style={{ fontWeight: 700, fontSize: '1.125rem' }}>{device.name}</span>
-                                <span style={{ fontWeight: 600 }}>{device.hours || 0} hrs/day</span>
+                                <span style={{ fontWeight: 700, fontSize: '1.125rem', color: 'var(--text-primary)' }}>{device.name}</span>
+                                <span style={{ fontWeight: 600, color: 'var(--text-primary)' }}>{device.hours || 0} hrs/day</span>
                             </div>
                         </div>
 
@@ -59,20 +60,20 @@ const Audit = ({ devices, onUpdate, onScreenChange }) => {
                                 value={device.hours || 0}
                                 onChange={(e) => handleHoursChange(device.id, e.target.value)}
                             />
-                            <Moon size={20} color="#6B7280" />
+                            <Moon size={20} color="var(--text-secondary)" />
                         </div>
 
                         <div style={{
                             display: 'flex',
                             alignItems: 'center',
                             gap: '0.5rem',
-                            backgroundColor: 'rgba(255,255,255,0.6)',
+                            backgroundColor: 'rgba(0,0,0,0.2)',
                             padding: '0.5rem 0.75rem',
                             borderRadius: 'var(--radius-sm)',
                             fontSize: '0.75rem',
                             color: 'var(--text-secondary)'
                         }}>
-                            <Info size={14} />
+                            <Info size={14} color="var(--accent)" />
                             <span>{getContextBadge(device.name)}</span>
                         </div>
                     </div>
