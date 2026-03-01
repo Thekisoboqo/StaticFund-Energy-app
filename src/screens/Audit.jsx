@@ -22,7 +22,7 @@ const Audit = ({ devices, onUpdate, onScreenChange }) => {
     };
 
     return (
-        <div>
+        <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
             <div className="header">Daily Habits</div>
             <div className="sub-header">Tell us how you use your devices.</div>
 
@@ -33,7 +33,7 @@ const Audit = ({ devices, onUpdate, onScreenChange }) => {
                             <div style={{
                                 width: '40px',
                                 height: '40px',
-                                backgroundColor: 'white',
+                                backgroundColor: 'var(--bg-card)',
                                 borderRadius: '8px',
                                 display: 'flex',
                                 alignItems: 'center',
@@ -66,7 +66,7 @@ const Audit = ({ devices, onUpdate, onScreenChange }) => {
                             display: 'flex',
                             alignItems: 'center',
                             gap: '0.5rem',
-                            backgroundColor: 'rgba(255,255,255,0.6)',
+                            backgroundColor: 'rgba(0,0,0,0.2)',
                             padding: '0.5rem 0.75rem',
                             borderRadius: 'var(--radius-sm)',
                             fontSize: '0.75rem',

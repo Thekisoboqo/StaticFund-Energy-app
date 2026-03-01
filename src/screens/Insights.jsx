@@ -2,12 +2,13 @@ import React from 'react';
 import { Clock, Thermometer, Lightbulb, Battery, ChevronRight } from 'lucide-react';
 
 const Insights = ({ devices }) => {
-    // Mock calculation for demo purposes to match wireframe
+    // Dynamic calculation
     const totalLoad = devices.reduce((acc, device) => acc + (device.watts * (device.hours || 0)), 0) / 1000;
-    const estBill = 150; // Hardcoded for demo match
+    // Assume roughly 30 days and a rate of $0.15 per kWh for a realistic estimate
+    const estBill = Math.round(totalLoad * 30 * 0.15);
 
     return (
-        <div>
+        <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
             <div className="header">Your Personal Energy Plan</div>
             <div className="sub-header">Actionable steps to save money.</div>
 
@@ -18,7 +19,7 @@ const Insights = ({ devices }) => {
                         width: '200px',
                         height: '200px',
                         borderRadius: '50%',
-                        background: 'conic-gradient(#FCD34D 0% 35%, #6EE7B7 35% 65%, #93C5FD 65% 100%)',
+                        background: 'conic-gradient(#0CD3AD 0% 35%, #059669 35% 65%, #1E3A4C 65% 100%)',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
@@ -70,14 +71,14 @@ const Insights = ({ devices }) => {
                     {/* Card 1 */}
                     <div className="card" style={{ minWidth: '160px', flex: '0 0 auto', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                            <div style={{ background: '#DBEAFE', padding: '0.5rem', borderRadius: '50%' }}>
-                                <Clock size={20} color="#2563EB" />
+                            <div style={{ background: 'rgba(56, 189, 248, 0.1)', padding: '0.5rem', borderRadius: '50%' }}>
+                                <Clock size={20} color="#38BDF8" />
                             </div>
-                            <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#6B7280' }}>1</span>
+                            <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#9CA3AF' }}>1</span>
                         </div>
                         <div style={{ fontWeight: 700, fontSize: '0.875rem' }}>Shift to Off-Peak</div>
                         <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Run dishwasher/laundry after 9 PM.</div>
-                        <div style={{ marginTop: 'auto', background: '#D1FAE5', color: '#065F46', padding: '0.25rem 0.5rem', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 600, textAlign: 'center' }}>
+                        <div style={{ marginTop: 'auto', background: 'var(--bg-mint)', color: 'var(--accent)', padding: '0.25rem 0.5rem', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 600, textAlign: 'center' }}>
                             Save ~$20/mo
                         </div>
                     </div>
@@ -85,14 +86,14 @@ const Insights = ({ devices }) => {
                     {/* Card 2 */}
                     <div className="card" style={{ minWidth: '160px', flex: '0 0 auto', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                            <div style={{ background: '#FEE2E2', padding: '0.5rem', borderRadius: '50%' }}>
-                                <Thermometer size={20} color="#DC2626" />
+                            <div style={{ background: 'rgba(239, 68, 68, 0.1)', padding: '0.5rem', borderRadius: '50%' }}>
+                                <Thermometer size={20} color="#EF4444" />
                             </div>
-                            <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#6B7280' }}>2</span>
+                            <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#9CA3AF' }}>2</span>
                         </div>
                         <div style={{ fontWeight: 700, fontSize: '0.875rem' }}>Lower Geyser Temp</div>
                         <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Set to 55°C.</div>
-                        <div style={{ marginTop: 'auto', background: '#D1FAE5', color: '#065F46', padding: '0.25rem 0.5rem', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 600, textAlign: 'center' }}>
+                        <div style={{ marginTop: 'auto', background: 'var(--bg-mint)', color: 'var(--accent)', padding: '0.25rem 0.5rem', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 600, textAlign: 'center' }}>
                             Save ~$12/mo
                         </div>
                     </div>
@@ -100,14 +101,14 @@ const Insights = ({ devices }) => {
                     {/* Card 3 */}
                     <div className="card" style={{ minWidth: '160px', flex: '0 0 auto', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                            <div style={{ background: '#FEF3C7', padding: '0.5rem', borderRadius: '50%' }}>
-                                <Lightbulb size={20} color="#D97706" />
+                            <div style={{ background: 'rgba(252, 211, 77, 0.1)', padding: '0.5rem', borderRadius: '50%' }}>
+                                <Lightbulb size={20} color="#FCD34D" />
                             </div>
-                            <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#6B7280' }}>3</span>
+                            <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#9CA3AF' }}>3</span>
                         </div>
                         <div style={{ fontWeight: 700, fontSize: '0.875rem' }}>Switch to LEDs</div>
                         <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Replace old bulbs.</div>
-                        <div style={{ marginTop: 'auto', background: '#D1FAE5', color: '#065F46', padding: '0.25rem 0.5rem', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 600, textAlign: 'center' }}>
+                        <div style={{ marginTop: 'auto', background: 'var(--bg-mint)', color: 'var(--accent)', padding: '0.25rem 0.5rem', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 600, textAlign: 'center' }}>
                             Save ~$5/mo
                         </div>
                     </div>
@@ -116,9 +117,9 @@ const Insights = ({ devices }) => {
                 {/* Goal Card */}
                 <div className="card" style={{ display: 'flex', gap: '1rem', alignItems: 'center', marginTop: '1rem' }}>
                     <div style={{ position: 'relative' }}>
-                        <Sun size={32} color="#F59E0B" />
-                        <div style={{ position: 'absolute', bottom: -5, right: -5, background: '#10B981', borderRadius: '50%', padding: '2px' }}>
-                            <Battery size={12} color="white" />
+                        <Sun size={32} color="#FCD34D" />
+                        <div style={{ position: 'absolute', bottom: -5, right: -5, background: 'var(--accent)', borderRadius: '50%', padding: '2px' }}>
+                            <Battery size={12} color="#080D0C" />
                         </div>
                     </div>
                     <div style={{ flex: 1 }}>
