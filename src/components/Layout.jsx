@@ -11,9 +11,7 @@ const Layout = ({ children, activeScreen, onScreenChange }) => {
 
     return (
         <div className="container">
-            <div className="content">
-                {children}
-            </div>
+            {children}
 
             <nav className="nav-bar">
                 {navItems.map((item) => {
