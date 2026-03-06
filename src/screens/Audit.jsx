@@ -23,17 +23,17 @@ const Audit = ({ devices, onUpdate, onScreenChange }) => {
 
     return (
         <div>
-            <div className="header">Daily Habits</div>
-            <div className="sub-header">Tell us how you use your devices.</div>
+            <div className="header" style={{ padding: '0 0 0.5rem 0' }}>Daily Habits</div>
+            <div className="sub-header" style={{ padding: '0 0 1rem 0' }}>Tell us how you use your devices.</div>
 
-            <div className="content">
+            <div>
                 {devices.map((device) => (
                     <div key={device.id} className="card card-mint" style={{ padding: '1.5rem' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
                             <div style={{
                                 width: '40px',
                                 height: '40px',
-                                backgroundColor: 'white',
+                                backgroundColor: '#0D211E',
                                 borderRadius: '8px',
                                 display: 'flex',
                                 alignItems: 'center',
@@ -66,7 +66,7 @@ const Audit = ({ devices, onUpdate, onScreenChange }) => {
                             display: 'flex',
                             alignItems: 'center',
                             gap: '0.5rem',
-                            backgroundColor: 'rgba(255,255,255,0.6)',
+                            backgroundColor: 'rgba(0,0,0,0.2)',
                             padding: '0.5rem 0.75rem',
                             borderRadius: 'var(--radius-sm)',
                             fontSize: '0.75rem',

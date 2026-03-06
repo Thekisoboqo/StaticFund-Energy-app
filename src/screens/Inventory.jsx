@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Camera, ChevronRight, Refrigerator, Tv, Zap, CheckCircle } from 'lucide-react';
 
-const Inventory = ({ devices, onAdd, onUpdate, onRemove }) => {
+const Inventory = ({ devices, onAdd, onRemove }) => {
     const [name, setName] = useState('');
     const [watts, setWatts] = useState('');
     const [isAdding, setIsAdding] = useState(false);
@@ -24,10 +24,10 @@ const Inventory = ({ devices, onAdd, onUpdate, onRemove }) => {
 
     return (
         <div>
-            <div className="header">My Home's Devices</div>
-            <div className="sub-header">Let's build your energy profile together.</div>
+            <div className="header" style={{ padding: '0 0 0.5rem 0' }}>My Home's Devices</div>
+            <div className="sub-header" style={{ padding: '0 0 1rem 0' }}>Let's build your energy profile together.</div>
 
-            <div style={{ padding: '0 1.5rem 1.5rem' }}>
+            <div>
                 {/* Scan Card */}
                 {!isAdding ? (
                     <div
@@ -88,12 +88,12 @@ const Inventory = ({ devices, onAdd, onUpdate, onRemove }) => {
                             <div style={{
                                 width: '48px',
                                 height: '48px',
-                                backgroundColor: '#FEF3C7',
+                                backgroundColor: '#2A1F13',
                                 borderRadius: '12px',
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
-                                color: '#D97706'
+                                color: '#FCD34D'
                             }}>
                                 {getIcon(device.name)}
                             </div>
@@ -113,19 +113,18 @@ const Inventory = ({ devices, onAdd, onUpdate, onRemove }) => {
 
             {/* Footer / Progress */}
             <div style={{
-                position: 'sticky',
-                bottom: 0,
+                marginTop: '1.5rem',
                 backgroundColor: 'var(--bg-card)',
                 padding: '1.5rem',
-                borderTop: '1px solid var(--border)',
-                borderRadius: 'var(--radius-lg) var(--radius-lg) 0 0',
-                boxShadow: '0 -4px 6px -1px rgb(0 0 0 / 0.05)'
+                border: '1px solid var(--border)',
+                borderRadius: 'var(--radius-lg)',
+                boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.05)'
             }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem', fontSize: '0.875rem', fontWeight: 600 }}>
                     <span>Profile Completeness: <span style={{ color: 'var(--text-primary)' }}>Good Start!</span></span>
                     <CheckCircle size={16} color="var(--accent)" />
                 </div>
-                <div style={{ width: '100%', height: '8px', backgroundColor: '#E5E7EB', borderRadius: '4px', overflow: 'hidden' }}>
+                <div style={{ width: '100%', height: '8px', backgroundColor: '#374151', borderRadius: '4px', overflow: 'hidden' }}>
                     <div style={{ width: '60%', height: '100%', backgroundColor: 'var(--accent)', borderRadius: '4px' }} />
                 </div>
             </div>

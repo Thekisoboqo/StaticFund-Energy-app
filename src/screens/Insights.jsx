@@ -1,17 +1,16 @@
 import React from 'react';
 import { Clock, Thermometer, Lightbulb, Battery, ChevronRight } from 'lucide-react';
 
-const Insights = ({ devices }) => {
+const Insights = () => {
     // Mock calculation for demo purposes to match wireframe
-    const totalLoad = devices.reduce((acc, device) => acc + (device.watts * (device.hours || 0)), 0) / 1000;
     const estBill = 150; // Hardcoded for demo match
 
     return (
         <div>
-            <div className="header">Your Personal Energy Plan</div>
-            <div className="sub-header">Actionable steps to save money.</div>
+            <div className="header" style={{ padding: '0 0 0.5rem 0' }}>Your Personal Energy Plan</div>
+            <div className="sub-header" style={{ padding: '0 0 1rem 0' }}>Actionable steps to save money.</div>
 
-            <div className="content">
+            <div>
                 {/* Donut Chart Section */}
                 <div style={{ display: 'flex', justifyContent: 'center', margin: '2rem 0', position: 'relative' }}>
                     <div style={{
@@ -70,14 +69,14 @@ const Insights = ({ devices }) => {
                     {/* Card 1 */}
                     <div className="card" style={{ minWidth: '160px', flex: '0 0 auto', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                            <div style={{ background: '#DBEAFE', padding: '0.5rem', borderRadius: '50%' }}>
-                                <Clock size={20} color="#2563EB" />
+                            <div style={{ background: '#1E3A8A', padding: '0.5rem', borderRadius: '50%' }}>
+                                <Clock size={20} color="#60A5FA" />
                             </div>
-                            <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#6B7280' }}>1</span>
+                            <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#9CA3AF' }}>1</span>
                         </div>
                         <div style={{ fontWeight: 700, fontSize: '0.875rem' }}>Shift to Off-Peak</div>
                         <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Run dishwasher/laundry after 9 PM.</div>
-                        <div style={{ marginTop: 'auto', background: '#D1FAE5', color: '#065F46', padding: '0.25rem 0.5rem', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 600, textAlign: 'center' }}>
+                        <div style={{ marginTop: 'auto', background: '#064E3B', color: '#34D399', padding: '0.25rem 0.5rem', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 600, textAlign: 'center' }}>
                             Save ~$20/mo
                         </div>
                     </div>
@@ -85,14 +84,14 @@ const Insights = ({ devices }) => {
                     {/* Card 2 */}
                     <div className="card" style={{ minWidth: '160px', flex: '0 0 auto', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                            <div style={{ background: '#FEE2E2', padding: '0.5rem', borderRadius: '50%' }}>
-                                <Thermometer size={20} color="#DC2626" />
+                            <div style={{ background: '#7F1D1D', padding: '0.5rem', borderRadius: '50%' }}>
+                                <Thermometer size={20} color="#F87171" />
                             </div>
-                            <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#6B7280' }}>2</span>
+                            <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#9CA3AF' }}>2</span>
                         </div>
                         <div style={{ fontWeight: 700, fontSize: '0.875rem' }}>Lower Geyser Temp</div>
                         <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Set to 55°C.</div>
-                        <div style={{ marginTop: 'auto', background: '#D1FAE5', color: '#065F46', padding: '0.25rem 0.5rem', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 600, textAlign: 'center' }}>
+                        <div style={{ marginTop: 'auto', background: '#064E3B', color: '#34D399', padding: '0.25rem 0.5rem', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 600, textAlign: 'center' }}>
                             Save ~$12/mo
                         </div>
                     </div>
@@ -100,14 +99,14 @@ const Insights = ({ devices }) => {
                     {/* Card 3 */}
                     <div className="card" style={{ minWidth: '160px', flex: '0 0 auto', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                            <div style={{ background: '#FEF3C7', padding: '0.5rem', borderRadius: '50%' }}>
-                                <Lightbulb size={20} color="#D97706" />
+                            <div style={{ background: '#78350F', padding: '0.5rem', borderRadius: '50%' }}>
+                                <Lightbulb size={20} color="#FBBF24" />
                             </div>
-                            <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#6B7280' }}>3</span>
+                            <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#9CA3AF' }}>3</span>
                         </div>
                         <div style={{ fontWeight: 700, fontSize: '0.875rem' }}>Switch to LEDs</div>
                         <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Replace old bulbs.</div>
-                        <div style={{ marginTop: 'auto', background: '#D1FAE5', color: '#065F46', padding: '0.25rem 0.5rem', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 600, textAlign: 'center' }}>
+                        <div style={{ marginTop: 'auto', background: '#064E3B', color: '#34D399', padding: '0.25rem 0.5rem', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 600, textAlign: 'center' }}>
                             Save ~$5/mo
                         </div>
                     </div>
