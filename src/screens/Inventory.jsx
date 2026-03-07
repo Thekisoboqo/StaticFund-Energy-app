@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Camera, ChevronRight, Refrigerator, Tv, Zap, CheckCircle } from 'lucide-react';
 
-const Inventory = ({ devices, onAdd, onUpdate, onRemove }) => {
+const Inventory = ({ devices, onAdd, onRemove }) => {
     const [name, setName] = useState('');
     const [watts, setWatts] = useState('');
     const [isAdding, setIsAdding] = useState(false);
@@ -113,8 +113,6 @@ const Inventory = ({ devices, onAdd, onUpdate, onRemove }) => {
 
             {/* Footer / Progress */}
             <div style={{
-                position: 'sticky',
-                bottom: 0,
                 backgroundColor: 'var(--bg-card)',
                 padding: '1.5rem',
                 borderTop: '1px solid var(--border)',
