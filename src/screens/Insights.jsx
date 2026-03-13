@@ -1,9 +1,8 @@
 import React from 'react';
-import { Clock, Thermometer, Lightbulb, Battery, ChevronRight } from 'lucide-react';
+import { Clock, Thermometer, Lightbulb, Battery, ChevronRight, Sun } from 'lucide-react';
 
-const Insights = ({ devices }) => {
+const Insights = () => {
     // Mock calculation for demo purposes to match wireframe
-    const totalLoad = devices.reduce((acc, device) => acc + (device.watts * (device.hours || 0)), 0) / 1000;
     const estBill = 150; // Hardcoded for demo match
 
     return (
@@ -27,7 +26,7 @@ const Insights = ({ devices }) => {
                         <div style={{
                             width: '140px',
                             height: '140px',
-                            backgroundColor: 'var(--bg-primary)',
+                            backgroundColor: '#111C1A',
                             borderRadius: '50%',
                             display: 'flex',
                             flexDirection: 'column',
@@ -70,14 +69,14 @@ const Insights = ({ devices }) => {
                     {/* Card 1 */}
                     <div className="card" style={{ minWidth: '160px', flex: '0 0 auto', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                            <div style={{ background: '#DBEAFE', padding: '0.5rem', borderRadius: '50%' }}>
-                                <Clock size={20} color="#2563EB" />
+                            <div style={{ background: '#1F2937', padding: '0.5rem', borderRadius: '50%' }}>
+                                <Clock size={20} color="#0CD3AD" />
                             </div>
                             <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#6B7280' }}>1</span>
                         </div>
                         <div style={{ fontWeight: 700, fontSize: '0.875rem' }}>Shift to Off-Peak</div>
                         <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Run dishwasher/laundry after 9 PM.</div>
-                        <div style={{ marginTop: 'auto', background: '#D1FAE5', color: '#065F46', padding: '0.25rem 0.5rem', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 600, textAlign: 'center' }}>
+                        <div style={{ marginTop: 'auto', background: '#065F46', color: '#A7F3D0', padding: '0.25rem 0.5rem', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 600, textAlign: 'center' }}>
                             Save ~$20/mo
                         </div>
                     </div>
@@ -85,14 +84,14 @@ const Insights = ({ devices }) => {
                     {/* Card 2 */}
                     <div className="card" style={{ minWidth: '160px', flex: '0 0 auto', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                            <div style={{ background: '#FEE2E2', padding: '0.5rem', borderRadius: '50%' }}>
-                                <Thermometer size={20} color="#DC2626" />
+                            <div style={{ background: '#1F2937', padding: '0.5rem', borderRadius: '50%' }}>
+                                <Thermometer size={20} color="#0CD3AD" />
                             </div>
                             <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#6B7280' }}>2</span>
                         </div>
                         <div style={{ fontWeight: 700, fontSize: '0.875rem' }}>Lower Geyser Temp</div>
                         <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Set to 55°C.</div>
-                        <div style={{ marginTop: 'auto', background: '#D1FAE5', color: '#065F46', padding: '0.25rem 0.5rem', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 600, textAlign: 'center' }}>
+                        <div style={{ marginTop: 'auto', background: '#065F46', color: '#A7F3D0', padding: '0.25rem 0.5rem', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 600, textAlign: 'center' }}>
                             Save ~$12/mo
                         </div>
                     </div>
@@ -100,14 +99,14 @@ const Insights = ({ devices }) => {
                     {/* Card 3 */}
                     <div className="card" style={{ minWidth: '160px', flex: '0 0 auto', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                            <div style={{ background: '#FEF3C7', padding: '0.5rem', borderRadius: '50%' }}>
-                                <Lightbulb size={20} color="#D97706" />
+                            <div style={{ background: '#1F2937', padding: '0.5rem', borderRadius: '50%' }}>
+                                <Lightbulb size={20} color="#0CD3AD" />
                             </div>
                             <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#6B7280' }}>3</span>
                         </div>
                         <div style={{ fontWeight: 700, fontSize: '0.875rem' }}>Switch to LEDs</div>
                         <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Replace old bulbs.</div>
-                        <div style={{ marginTop: 'auto', background: '#D1FAE5', color: '#065F46', padding: '0.25rem 0.5rem', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 600, textAlign: 'center' }}>
+                        <div style={{ marginTop: 'auto', background: '#065F46', color: '#A7F3D0', padding: '0.25rem 0.5rem', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 600, textAlign: 'center' }}>
                             Save ~$5/mo
                         </div>
                     </div>
@@ -133,20 +132,5 @@ const Insights = ({ devices }) => {
         </div>
     );
 };
-
-// Simple Sun icon component if not imported (but it is)
-const Sun = ({ size, color }) => (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="12" cy="12" r="5"></circle>
-        <line x1="12" y1="1" x2="12" y2="3"></line>
-        <line x1="12" y1="21" x2="12" y2="23"></line>
-        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-        <line x1="1" y1="12" x2="3" y2="12"></line>
-        <line x1="21" y1="12" x2="23" y2="12"></line>
-        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-    </svg>
-);
 
 export default Insights;
