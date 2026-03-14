@@ -1,8 +1,8 @@
 import React from 'react';
-import { Clock, Thermometer, Lightbulb, Battery, ChevronRight } from 'lucide-react';
+import { Clock, Thermometer, Lightbulb, Battery, ChevronRight, Sun } from 'lucide-react';
 
 const Insights = ({ devices }) => {
-    // Mock calculation for demo purposes to match wireframe
+    // Calculate total load for potential use/display
     const totalLoad = devices.reduce((acc, device) => acc + (device.watts * (device.hours || 0)), 0) / 1000;
     const estBill = 150; // Hardcoded for demo match
 
@@ -51,8 +51,8 @@ const Insights = ({ devices }) => {
                         <div style={{ fontWeight: 700 }}>$40</div>
                     </div>
                     <div style={{ position: 'absolute', top: '40%', left: '-10px', textAlign: 'right' }}>
-                        <div style={{ fontWeight: 600 }}>Other</div>
-                        <div style={{ fontWeight: 700 }}>$60</div>
+                        <div style={{ fontWeight: 600 }}>Total Load</div>
+                        <div style={{ fontWeight: 700 }}>{totalLoad.toFixed(1)} kWh/day</div>
                     </div>
                 </div>
 
@@ -133,20 +133,5 @@ const Insights = ({ devices }) => {
         </div>
     );
 };
-
-// Simple Sun icon component if not imported (but it is)
-const Sun = ({ size, color }) => (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="12" cy="12" r="5"></circle>
-        <line x1="12" y1="1" x2="12" y2="3"></line>
-        <line x1="12" y1="21" x2="12" y2="23"></line>
-        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-        <line x1="1" y1="12" x2="3" y2="12"></line>
-        <line x1="21" y1="12" x2="23" y2="12"></line>
-        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-    </svg>
-);
 
 export default Insights;

@@ -99,8 +99,22 @@ const Inventory = ({ devices, onAdd, onUpdate, onRemove }) => {
                             </div>
 
                             <div style={{ flex: 1 }}>
-                                <div style={{ fontWeight: 600 }}>{device.name}</div>
-                                <div style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>{device.watts}W</div>
+                                <div style={{ fontWeight: 600 }}>
+                                    <input
+                                        type="text"
+                                        value={device.name}
+                                        onChange={(e) => onUpdate(device.id, { name: e.target.value })}
+                                        style={{ background: 'transparent', border: 'none', color: 'inherit', fontWeight: 'inherit', width: '100%' }}
+                                    />
+                                </div>
+                                <div style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>
+                                    <input
+                                        type="number"
+                                        value={device.watts}
+                                        onChange={(e) => onUpdate(device.id, { watts: parseInt(e.target.value) || 0 })}
+                                        style={{ background: 'transparent', border: 'none', color: 'inherit', width: '60px' }}
+                                    />W
+                                </div>
                             </div>
 
                             <button onClick={() => onRemove(device.id)} style={{ color: 'var(--text-secondary)' }}>

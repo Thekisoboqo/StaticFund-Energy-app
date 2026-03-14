@@ -6,22 +6,37 @@ import Insights from './screens/Insights';
 
 function App() {
   const [activeScreen, setActiveScreen] = useState('inventory');
-  const [devices, setDevices] = useState([
-    { id: 1, name: 'Living Room Heater', watts: 1500, hours: 0 },
-    { id: 2, name: 'Samsung Fridge', watts: 200, hours: 24 },
-    { id: 3, name: 'Microwave', watts: 200, hours: 0 },
-  ]);
+  const [devices, setDevices] = useState(() => {
+    const savedDevices = localStorage.getItem('devices');
+    if (savedDevices) {
+      try {
+        return JSON.parse(savedDevices);
+      } catch (e) {
+        console.error("Failed to parse devices from localStorage", e);
+      }
+    }
+    return [
+      { id: 1, name: 'Living Room Heater', watts: 1500, hours: 0 },
+      { id: 2, name: 'Samsung Fridge', watts: 200, hours: 24 },
+      { id: 3, name: 'Microwave', watts: 200, hours: 0 },
+    ];
+  });
+
+  const saveDevices = (newDevices) => {
+    setDevices(newDevices);
+    localStorage.setItem('devices', JSON.stringify(newDevices));
+  };
 
   const addDevice = (device) => {
-    setDevices([...devices, { ...device, id: Date.now(), hours: 0 }]);
+    saveDevices([...devices, { ...device, id: Date.now(), hours: 0 }]);
   };
 
   const updateDevice = (id, updatedDevice) => {
-    setDevices(devices.map(d => d.id === id ? { ...d, ...updatedDevice } : d));
+    saveDevices(devices.map(d => d.id === id ? { ...d, ...updatedDevice } : d));
   };
 
   const removeDevice = (id) => {
-    setDevices(devices.filter(d => d.id !== id));
+    saveDevices(devices.filter(d => d.id !== id));
   };
 
   const renderScreen = () => {
