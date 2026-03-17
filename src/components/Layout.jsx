@@ -11,7 +11,7 @@ const Layout = ({ children, activeScreen, onScreenChange }) => {
 
     return (
         <div className="container">
-            <div className="content">
+            <div className="content" style={{ display: 'block' }}>
                 {children}
             </div>
 
