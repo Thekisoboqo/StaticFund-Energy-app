@@ -3,14 +3,31 @@ import Layout from './components/Layout';
 import Inventory from './screens/Inventory';
 import Audit from './screens/Audit';
 import Insights from './screens/Insights';
+import Settings from './screens/Settings';
+
+import { useEffect } from 'react';
 
 function App() {
   const [activeScreen, setActiveScreen] = useState('inventory');
-  const [devices, setDevices] = useState([
-    { id: 1, name: 'Living Room Heater', watts: 1500, hours: 0 },
-    { id: 2, name: 'Samsung Fridge', watts: 200, hours: 24 },
-    { id: 3, name: 'Microwave', watts: 200, hours: 0 },
-  ]);
+  const [devices, setDevices] = useState(() => {
+    const saved = localStorage.getItem('devices');
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch (e) {
+        console.error('Error parsing saved devices:', e);
+      }
+    }
+    return [
+      { id: 1, name: 'Living Room Heater', watts: 1500, hours: 0 },
+      { id: 2, name: 'Samsung Fridge', watts: 200, hours: 24 },
+      { id: 3, name: 'Microwave', watts: 200, hours: 0 },
+    ];
+  });
+
+  useEffect(() => {
+    localStorage.setItem('devices', JSON.stringify(devices));
+  }, [devices]);
 
   const addDevice = (device) => {
     setDevices([...devices, { ...device, id: Date.now(), hours: 0 }]);
@@ -40,15 +57,7 @@ function App() {
       case 'insights':
         return <Insights devices={devices} />;
       case 'settings':
-        return (
-          <div>
-            <div className="header">Settings</div>
-            <div style={{ padding: '1rem' }}>
-              <h2>Settings</h2>
-              <p>App settings will go here.</p>
-            </div>
-          </div>
-        );
+        return <Settings setDevices={setDevices} />;
       default:
         return <Inventory />;
     }

@@ -33,13 +33,14 @@ const Audit = ({ devices, onUpdate, onScreenChange }) => {
                             <div style={{
                                 width: '40px',
                                 height: '40px',
-                                backgroundColor: 'white',
+                                backgroundColor: 'var(--bg-card)',
                                 borderRadius: '8px',
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
-                                color: 'var(--text-brand)',
-                                boxShadow: 'var(--shadow-sm)'
+                                color: 'var(--accent)',
+                                boxShadow: 'var(--shadow-sm)',
+                                border: '1px solid var(--border)'
                             }}>
                                 {getIcon(device.name)}
                             </div>
@@ -66,11 +67,12 @@ const Audit = ({ devices, onUpdate, onScreenChange }) => {
                             display: 'flex',
                             alignItems: 'center',
                             gap: '0.5rem',
-                            backgroundColor: 'rgba(255,255,255,0.6)',
+                            backgroundColor: 'var(--bg-primary)',
                             padding: '0.5rem 0.75rem',
                             borderRadius: 'var(--radius-sm)',
                             fontSize: '0.75rem',
-                            color: 'var(--text-secondary)'
+                            color: 'var(--text-secondary)',
+                            border: '1px solid var(--border)'
                         }}>
                             <Info size={14} />
                             <span>{getContextBadge(device.name)}</span>
