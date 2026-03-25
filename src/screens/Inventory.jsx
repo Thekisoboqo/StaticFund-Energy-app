@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Camera, ChevronRight, Refrigerator, Tv, Zap, CheckCircle } from 'lucide-react';
 
-const Inventory = ({ devices, onAdd, onUpdate, onRemove }) => {
+const Inventory = ({ devices, onAdd, onRemove }) => {
     const [name, setName] = useState('');
     const [watts, setWatts] = useState('');
     const [isAdding, setIsAdding] = useState(false);
@@ -88,12 +88,12 @@ const Inventory = ({ devices, onAdd, onUpdate, onRemove }) => {
                             <div style={{
                                 width: '48px',
                                 height: '48px',
-                                backgroundColor: '#FEF3C7',
+                                backgroundColor: 'var(--bg-mint)',
                                 borderRadius: '12px',
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
-                                color: '#D97706'
+                                color: 'var(--text-brand)'
                             }}>
                                 {getIcon(device.name)}
                             </div>
@@ -119,7 +119,8 @@ const Inventory = ({ devices, onAdd, onUpdate, onRemove }) => {
                 padding: '1.5rem',
                 borderTop: '1px solid var(--border)',
                 borderRadius: 'var(--radius-lg) var(--radius-lg) 0 0',
-                boxShadow: '0 -4px 6px -1px rgb(0 0 0 / 0.05)'
+                boxShadow: '0 -4px 6px -1px rgb(0 0 0 / 0.05)',
+                margin: '0 -1.5rem -1.5rem -1.5rem'
             }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem', fontSize: '0.875rem', fontWeight: 600 }}>
                     <span>Profile Completeness: <span style={{ color: 'var(--text-primary)' }}>Good Start!</span></span>
