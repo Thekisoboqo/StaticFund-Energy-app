@@ -33,7 +33,8 @@ const Audit = ({ devices, onUpdate, onScreenChange }) => {
                             <div style={{
                                 width: '40px',
                                 height: '40px',
-                                backgroundColor: 'white',
+                                backgroundColor: 'var(--bg-primary)',
+                                border: '1px solid var(--border)',
                                 borderRadius: '8px',
                                 display: 'flex',
                                 alignItems: 'center',
@@ -50,7 +51,7 @@ const Audit = ({ devices, onUpdate, onScreenChange }) => {
                         </div>
 
                         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
-                            <Sun size={20} color="#F59E0B" />
+                            <Sun size={20} color="#FCD34D" />
                             <input
                                 type="range"
                                 min="0"
@@ -59,14 +60,14 @@ const Audit = ({ devices, onUpdate, onScreenChange }) => {
                                 value={device.hours || 0}
                                 onChange={(e) => handleHoursChange(device.id, e.target.value)}
                             />
-                            <Moon size={20} color="#6B7280" />
+                            <Moon size={20} color="var(--text-secondary)" />
                         </div>
 
                         <div style={{
                             display: 'flex',
                             alignItems: 'center',
                             gap: '0.5rem',
-                            backgroundColor: 'rgba(255,255,255,0.6)',
+                            backgroundColor: 'rgba(255,255,255,0.05)',
                             padding: '0.5rem 0.75rem',
                             borderRadius: 'var(--radius-sm)',
                             fontSize: '0.75rem',
