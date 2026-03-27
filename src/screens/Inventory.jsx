@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Camera, ChevronRight, Refrigerator, Tv, Zap, CheckCircle } from 'lucide-react';
 
-const Inventory = ({ devices, onAdd, onUpdate, onRemove }) => {
+const Inventory = ({ devices, onAdd, onRemove }) => {
     const [name, setName] = useState('');
     const [watts, setWatts] = useState('');
     const [isAdding, setIsAdding] = useState(false);
@@ -46,12 +46,12 @@ const Inventory = ({ devices, onAdd, onUpdate, onRemove }) => {
                         onClick={() => setIsAdding(true)}
                     >
                         {/* Decorative circle */}
-                        <div style={{ position: 'absolute', top: '-20px', right: '-20px', width: '100px', height: '100px', borderRadius: '50%', background: 'rgba(255,255,255,0.2)' }} />
+                        <div style={{ position: 'absolute', top: '-20px', right: '-20px', width: '100px', height: '100px', borderRadius: '50%', background: 'rgba(12, 211, 173, 0.1)' }} />
 
-                        <div style={{ background: 'rgba(255,255,255,0.3)', padding: '1rem', borderRadius: '50%', marginBottom: '1rem' }}>
-                            <Camera size={32} color="#0369A1" />
+                        <div style={{ background: 'rgba(12, 211, 173, 0.2)', padding: '1rem', borderRadius: '50%', marginBottom: '1rem' }}>
+                            <Camera size={32} color="var(--accent)" />
                         </div>
-                        <span style={{ fontWeight: 600, fontSize: '1.125rem' }}>Scan a new appliance</span>
+                        <span style={{ fontWeight: 600, fontSize: '1.125rem', color: 'var(--text-primary)' }}>Scan a new appliance</span>
                     </div>
                 ) : (
                     <form onSubmit={handleSubmit} className="card" style={{ marginBottom: '2rem' }}>
@@ -99,7 +99,7 @@ const Inventory = ({ devices, onAdd, onUpdate, onRemove }) => {
                             </div>
 
                             <div style={{ flex: 1 }}>
-                                <div style={{ fontWeight: 600 }}>{device.name}</div>
+                                <div style={{ fontWeight: 600, color: 'var(--text-primary)' }}>{device.name}</div>
                                 <div style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>{device.watts}W</div>
                             </div>
 
@@ -119,13 +119,13 @@ const Inventory = ({ devices, onAdd, onUpdate, onRemove }) => {
                 padding: '1.5rem',
                 borderTop: '1px solid var(--border)',
                 borderRadius: 'var(--radius-lg) var(--radius-lg) 0 0',
-                boxShadow: '0 -4px 6px -1px rgb(0 0 0 / 0.05)'
+                boxShadow: 'var(--shadow-md)'
             }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem', fontSize: '0.875rem', fontWeight: 600 }}>
                     <span>Profile Completeness: <span style={{ color: 'var(--text-primary)' }}>Good Start!</span></span>
                     <CheckCircle size={16} color="var(--accent)" />
                 </div>
-                <div style={{ width: '100%', height: '8px', backgroundColor: '#E5E7EB', borderRadius: '4px', overflow: 'hidden' }}>
+                <div style={{ width: '100%', height: '8px', backgroundColor: 'var(--border)', borderRadius: '4px', overflow: 'hidden' }}>
                     <div style={{ width: '60%', height: '100%', backgroundColor: 'var(--accent)', borderRadius: '4px' }} />
                 </div>
             </div>
