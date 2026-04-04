@@ -4,7 +4,7 @@ import { Clock, Thermometer, Lightbulb, Battery, ChevronRight } from 'lucide-rea
 const Insights = ({ devices }) => {
     // Mock calculation for demo purposes to match wireframe
     const totalLoad = devices.reduce((acc, device) => acc + (device.watts * (device.hours || 0)), 0) / 1000;
-    const estBill = 150; // Hardcoded for demo match
+    const estBill = Math.max(150, Math.round(totalLoad * 0.15 * 30)); // Rough estimate using totalLoad
 
     return (
         <div>
