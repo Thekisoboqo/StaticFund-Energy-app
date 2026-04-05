@@ -1,23 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap');
 
 :root {
-  /* Pastel Palette */
-  --bg-primary: #FFFBEB;
-  /* Cream */
-  --bg-card: #FFFFFF;
-  --bg-mint: #ECFDF5;
-  --bg-blue: #E0F2FE;
-  --bg-orange: #FEF3C7;
+  /* Privacy Filter Agent Theme */
+  --bg-primary: #111C1A;
+  --bg-card: #182724;
+  --bg-mint: #1E332F;
+  --bg-blue: #182724;
+  --bg-orange: #1E332F;
 
-  --text-primary: #1F2937;
-  --text-secondary: #6B7280;
-  --text-brand: #065F46;
-  /* Dark Mint */
+  --text-primary: #E5E7EB;
+  --text-secondary: #9CA3AF;
+  --text-brand: #0CD3AD;
 
-  --accent: #10B981;
-  --accent-hover: #059669;
+  --accent: #0CD3AD;
+  --accent-hover: #09A98A;
 
-  --border: #F3F4F6;
+  --border: #2A403A;
 
   --font-sans: 'Outfit', sans-serif;
   /* More friendly/rounded font */
@@ -41,7 +39,7 @@
 
 body {
   font-family: var(--font-sans);
-  background-color: #F9FAFB;
+  background-color: #0A1110;
   /* Outer background */
   color: var(--text-primary);
   line-height: 1.5;
@@ -53,6 +51,7 @@ button {
   border: none;
   background: none;
   font-family: inherit;
+  color: inherit;
 }
 
 input {
@@ -64,11 +63,12 @@ input {
   max-width: 480px;
   margin: 0 auto;
   background-color: var(--bg-primary);
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   box-shadow: var(--shadow-lg);
   position: relative;
+  overflow: hidden;
 }
 
 .header {
@@ -88,6 +88,7 @@ input {
 .content {
   flex: 1;
   padding: 1rem 1.5rem;
+  padding-bottom: 90px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -125,25 +126,30 @@ input {
 }
 
 .card-blue {
-  background: linear-gradient(135deg, #E0F2FE 0%, #BAE6FD 100%);
-  color: #0369A1;
+  background: linear-gradient(135deg, #1E3A8A 0%, #1D4ED8 100%);
+  color: #DBEAFE;
   border: none;
 }
 
 .card-mint {
   background-color: var(--bg-mint);
-  border: 1px solid #D1FAE5;
+  border: 1px solid #2A403A;
 }
 
 /* Navigation */
 .nav-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
   display: flex;
   justify-content: space-around;
   padding: 1rem;
   background-color: var(--bg-card);
   border-top: 1px solid var(--border);
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-  box-shadow: 0 -4px 6px -1px rgb(0 0 0 / 0.05);
+  box-shadow: 0 -4px 6px -1px rgb(0 0 0 / 0.3);
+  z-index: 50;
 }
 
 .nav-item {
