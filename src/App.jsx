@@ -1,16 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Layout from './components/Layout';
 import Inventory from './screens/Inventory';
 import Audit from './screens/Audit';
 import Insights from './screens/Insights';
+import Settings from './screens/Settings';
 
-function App() {
-  const [activeScreen, setActiveScreen] = useState('inventory');
-  const [devices, setDevices] = useState([
+const defaultDevices = [
     { id: 1, name: 'Living Room Heater', watts: 1500, hours: 0 },
     { id: 2, name: 'Samsung Fridge', watts: 200, hours: 24 },
     { id: 3, name: 'Microwave', watts: 200, hours: 0 },
-  ]);
+];
+
+const defaultSettings = {
+    electricityRate: 0.15,
+    inverterConfig: '5kW',
+    agentMemory: 'medium',
+    notificationsEnabled: true
+};
+
+function App() {
+  const [activeScreen, setActiveScreen] = useState('inventory');
+  const [devices, setDevices] = useState(() => {
+      const saved = localStorage.getItem('app_devices');
+      return saved ? JSON.parse(saved) : defaultDevices;
+  });
+
+  const [settings, setSettings] = useState(() => {
+      const saved = localStorage.getItem('app_settings');
+      return saved ? JSON.parse(saved) : defaultSettings;
+  });
+
+  useEffect(() => {
+      localStorage.setItem('app_devices', JSON.stringify(devices));
+  }, [devices]);
+
+  useEffect(() => {
+      localStorage.setItem('app_settings', JSON.stringify(settings));
+  }, [settings]);
 
   const addDevice = (device) => {
     setDevices([...devices, { ...device, id: Date.now(), hours: 0 }]);
@@ -22,6 +48,10 @@ function App() {
 
   const removeDevice = (id) => {
     setDevices(devices.filter(d => d.id !== id));
+  };
+
+  const updateSettings = (newSettings) => {
+      setSettings(prev => ({ ...prev, ...newSettings }));
   };
 
   const renderScreen = () => {
@@ -38,17 +68,9 @@ function App() {
       case 'audit':
         return <Audit devices={devices} onUpdate={updateDevice} onScreenChange={setActiveScreen} />;
       case 'insights':
-        return <Insights devices={devices} />;
+        return <Insights devices={devices} settings={settings} />;
       case 'settings':
-        return (
-          <div>
-            <div className="header">Settings</div>
-            <div style={{ padding: '1rem' }}>
-              <h2>Settings</h2>
-              <p>App settings will go here.</p>
-            </div>
-          </div>
-        );
+        return <Settings settings={settings} onUpdateSettings={updateSettings} />;
       default:
         return <Inventory />;
     }
