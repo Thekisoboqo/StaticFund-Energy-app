@@ -1,10 +1,12 @@
 import React from 'react';
 import { Clock, Thermometer, Lightbulb, Battery, ChevronRight } from 'lucide-react';
 
-const Insights = ({ devices }) => {
-    // Mock calculation for demo purposes to match wireframe
+const Insights = ({ devices, electricityRate }) => {
+    // Dynamic calculation based on devices and user-configured rate
+    // totalLoad is kWh per day. Monthly = totalLoad * 30. Bill = Monthly * rate.
     const totalLoad = devices.reduce((acc, device) => acc + (device.watts * (device.hours || 0)), 0) / 1000;
-    const estBill = 150; // Hardcoded for demo match
+    const monthlyLoad = totalLoad * 30;
+    const estBill = (monthlyLoad * (electricityRate || 0.15)).toFixed(2);
 
     return (
         <div>
@@ -18,7 +20,7 @@ const Insights = ({ devices }) => {
                         width: '200px',
                         height: '200px',
                         borderRadius: '50%',
-                        background: 'conic-gradient(#FCD34D 0% 35%, #6EE7B7 35% 65%, #93C5FD 65% 100%)',
+                        background: 'conic-gradient(#0CD3AD 0% 35%, #08A889 35% 65%, #153A47 65% 100%)',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
@@ -37,26 +39,26 @@ const Insights = ({ devices }) => {
                             zIndex: 10
                         }}>
                             <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginBottom: '0.25rem' }}>Estimated<br />Monthly Bill:</div>
-                            <div style={{ fontSize: '1.5rem', fontWeight: 800 }}>${estBill}</div>
+                            <div style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--text-primary)' }}>${estBill}</div>
                         </div>
                     </div>
 
                     {/* Labels (Absolute positioned for demo layout) */}
-                    <div style={{ position: 'absolute', top: '10%', right: '-10px', textAlign: 'left' }}>
+                    <div style={{ position: 'absolute', top: '10%', right: '-10px', textAlign: 'left', color: 'var(--text-primary)' }}>
                         <div style={{ fontWeight: 600 }}>Heating</div>
                         <div style={{ fontWeight: 700 }}>$50</div>
                     </div>
-                    <div style={{ position: 'absolute', bottom: '20%', right: '-10px', textAlign: 'left' }}>
+                    <div style={{ position: 'absolute', bottom: '20%', right: '-10px', textAlign: 'left', color: 'var(--text-primary)' }}>
                         <div style={{ fontWeight: 600 }}>Cooking</div>
                         <div style={{ fontWeight: 700 }}>$40</div>
                     </div>
-                    <div style={{ position: 'absolute', top: '40%', left: '-10px', textAlign: 'right' }}>
+                    <div style={{ position: 'absolute', top: '40%', left: '-10px', textAlign: 'right', color: 'var(--text-primary)' }}>
                         <div style={{ fontWeight: 600 }}>Other</div>
                         <div style={{ fontWeight: 700 }}>$60</div>
                     </div>
                 </div>
 
-                <h3 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '1rem' }}>Top Savings Opportunities</h3>
+                <h3 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '1rem', color: 'var(--text-primary)' }}>Top Savings Opportunities</h3>
 
                 {/* Horizontal Scroll Container */}
                 <div style={{
@@ -70,14 +72,14 @@ const Insights = ({ devices }) => {
                     {/* Card 1 */}
                     <div className="card" style={{ minWidth: '160px', flex: '0 0 auto', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                            <div style={{ background: '#DBEAFE', padding: '0.5rem', borderRadius: '50%' }}>
-                                <Clock size={20} color="#2563EB" />
+                            <div style={{ background: '#111C1A', padding: '0.5rem', borderRadius: '50%' }}>
+                                <Clock size={20} color="#0CD3AD" />
                             </div>
-                            <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#6B7280' }}>1</span>
+                            <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-secondary)' }}>1</span>
                         </div>
-                        <div style={{ fontWeight: 700, fontSize: '0.875rem' }}>Shift to Off-Peak</div>
+                        <div style={{ fontWeight: 700, fontSize: '0.875rem', color: 'var(--text-primary)' }}>Shift to Off-Peak</div>
                         <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Run dishwasher/laundry after 9 PM.</div>
-                        <div style={{ marginTop: 'auto', background: '#D1FAE5', color: '#065F46', padding: '0.25rem 0.5rem', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 600, textAlign: 'center' }}>
+                        <div style={{ marginTop: 'auto', background: '#111C1A', color: '#0CD3AD', padding: '0.25rem 0.5rem', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 600, textAlign: 'center' }}>
                             Save ~$20/mo
                         </div>
                     </div>
@@ -85,14 +87,14 @@ const Insights = ({ devices }) => {
                     {/* Card 2 */}
                     <div className="card" style={{ minWidth: '160px', flex: '0 0 auto', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                            <div style={{ background: '#FEE2E2', padding: '0.5rem', borderRadius: '50%' }}>
-                                <Thermometer size={20} color="#DC2626" />
+                            <div style={{ background: '#111C1A', padding: '0.5rem', borderRadius: '50%' }}>
+                                <Thermometer size={20} color="#0CD3AD" />
                             </div>
-                            <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#6B7280' }}>2</span>
+                            <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-secondary)' }}>2</span>
                         </div>
-                        <div style={{ fontWeight: 700, fontSize: '0.875rem' }}>Lower Geyser Temp</div>
+                        <div style={{ fontWeight: 700, fontSize: '0.875rem', color: 'var(--text-primary)' }}>Lower Geyser Temp</div>
                         <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Set to 55°C.</div>
-                        <div style={{ marginTop: 'auto', background: '#D1FAE5', color: '#065F46', padding: '0.25rem 0.5rem', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 600, textAlign: 'center' }}>
+                        <div style={{ marginTop: 'auto', background: '#111C1A', color: '#0CD3AD', padding: '0.25rem 0.5rem', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 600, textAlign: 'center' }}>
                             Save ~$12/mo
                         </div>
                     </div>
@@ -100,14 +102,14 @@ const Insights = ({ devices }) => {
                     {/* Card 3 */}
                     <div className="card" style={{ minWidth: '160px', flex: '0 0 auto', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                            <div style={{ background: '#FEF3C7', padding: '0.5rem', borderRadius: '50%' }}>
-                                <Lightbulb size={20} color="#D97706" />
+                            <div style={{ background: '#111C1A', padding: '0.5rem', borderRadius: '50%' }}>
+                                <Lightbulb size={20} color="#0CD3AD" />
                             </div>
-                            <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#6B7280' }}>3</span>
+                            <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-secondary)' }}>3</span>
                         </div>
-                        <div style={{ fontWeight: 700, fontSize: '0.875rem' }}>Switch to LEDs</div>
+                        <div style={{ fontWeight: 700, fontSize: '0.875rem', color: 'var(--text-primary)' }}>Switch to LEDs</div>
                         <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Replace old bulbs.</div>
-                        <div style={{ marginTop: 'auto', background: '#D1FAE5', color: '#065F46', padding: '0.25rem 0.5rem', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 600, textAlign: 'center' }}>
+                        <div style={{ marginTop: 'auto', background: '#111C1A', color: '#0CD3AD', padding: '0.25rem 0.5rem', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 600, textAlign: 'center' }}>
                             Save ~$5/mo
                         </div>
                     </div>
@@ -116,13 +118,13 @@ const Insights = ({ devices }) => {
                 {/* Goal Card */}
                 <div className="card" style={{ display: 'flex', gap: '1rem', alignItems: 'center', marginTop: '1rem' }}>
                     <div style={{ position: 'relative' }}>
-                        <Sun size={32} color="#F59E0B" />
-                        <div style={{ position: 'absolute', bottom: -5, right: -5, background: '#10B981', borderRadius: '50%', padding: '2px' }}>
-                            <Battery size={12} color="white" />
+                        <Sun size={32} color="#0CD3AD" />
+                        <div style={{ position: 'absolute', bottom: -5, right: -5, background: '#0CD3AD', borderRadius: '50%', padding: '2px' }}>
+                            <Battery size={12} color="#162421" />
                         </div>
                     </div>
                     <div style={{ flex: 1 }}>
-                        <div style={{ fontWeight: 700, fontSize: '0.875rem' }}>Long-Term Goal: Energy Independence</div>
+                        <div style={{ fontWeight: 700, fontSize: '0.875rem', color: 'var(--text-primary)' }}>Long-Term Goal: Energy Independence</div>
                         <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginTop: '0.25rem' }}>
                             Your Ideal Solar Setup: 5kW System + 10kWh Battery. Invest for lifetime savings.
                         </div>
