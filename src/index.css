@@ -1,23 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap');
 
 :root {
-  /* Pastel Palette */
-  --bg-primary: #FFFBEB;
-  /* Cream */
-  --bg-card: #FFFFFF;
-  --bg-mint: #ECFDF5;
-  --bg-blue: #E0F2FE;
-  --bg-orange: #FEF3C7;
+  /* Privacy Filter Agent Dark Theme Palette */
+  --bg-primary: #111C1A;
+  --bg-card: #1A2E2A;
+  --bg-mint: #223D38;
+  --bg-blue: #1C333D;
+  --bg-orange: #3D301C;
 
-  --text-primary: #1F2937;
-  --text-secondary: #6B7280;
-  --text-brand: #065F46;
-  /* Dark Mint */
+  --text-primary: #E5E7EB;
+  --text-secondary: #9CA3AF;
+  --text-brand: #0CD3AD;
 
-  --accent: #10B981;
-  --accent-hover: #059669;
+  --accent: #0CD3AD;
+  --accent-hover: #089A80;
 
-  --border: #F3F4F6;
+  --border: #2D4A45;
 
   --font-sans: 'Outfit', sans-serif;
   /* More friendly/rounded font */
@@ -28,9 +26,9 @@
   --radius-lg: 1.5rem;
   --radius-full: 9999px;
 
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.05), 0 4px 6px -2px rgb(0 0 0 / 0.05);
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.5);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.5), 0 2px 4px -2px rgb(0 0 0 / 0.5);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5), 0 4px 6px -2px rgb(0 0 0 / 0.5);
 }
 
 * {
@@ -41,7 +39,7 @@
 
 body {
   font-family: var(--font-sans);
-  background-color: #F9FAFB;
+  background-color: #0A0F0E;
   /* Outer background */
   color: var(--text-primary);
   line-height: 1.5;
@@ -53,10 +51,12 @@ button {
   border: none;
   background: none;
   font-family: inherit;
+  color: var(--text-primary);
 }
 
 input {
   font-family: inherit;
+  color: var(--text-primary);
 }
 
 /* Utilities */
@@ -64,7 +64,8 @@ input {
   max-width: 480px;
   margin: 0 auto;
   background-color: var(--bg-primary);
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   box-shadow: var(--shadow-lg);
@@ -87,7 +88,7 @@ input {
 
 .content {
   flex: 1;
-  padding: 1rem 1.5rem;
+  padding: 1rem 1.5rem 90px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -137,13 +138,18 @@ input {
 
 /* Navigation */
 .nav-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
   display: flex;
   justify-content: space-around;
   padding: 1rem;
   background-color: var(--bg-card);
   border-top: 1px solid var(--border);
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-  box-shadow: 0 -4px 6px -1px rgb(0 0 0 / 0.05);
+  box-shadow: 0 -4px 6px -1px rgb(0 0 0 / 0.5);
+  z-index: 100;
 }
 
 .nav-item {
