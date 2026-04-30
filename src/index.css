@@ -1,26 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap');
 
 :root {
-  /* Pastel Palette */
-  --bg-primary: #FFFBEB;
-  /* Cream */
-  --bg-card: #FFFFFF;
-  --bg-mint: #ECFDF5;
-  --bg-blue: #E0F2FE;
-  --bg-orange: #FEF3C7;
+  /* Privacy Filter Agent Dark Theme */
+  --bg-primary: #0A1110;
+  /* Very Dark Background */
+  --bg-card: #111C1A;
+  --bg-mint: #162421;
+  --bg-blue: #1A2725;
+  --bg-orange: #1E2E2A;
 
-  --text-primary: #1F2937;
-  --text-secondary: #6B7280;
-  --text-brand: #065F46;
-  /* Dark Mint */
+  --text-primary: #E5E7EB;
+  --text-secondary: #9CA3AF;
+  --text-brand: #0CD3AD;
+  /* Bright Cyan/Teal Accent */
 
-  --accent: #10B981;
-  --accent-hover: #059669;
+  --accent: #0CD3AD;
+  --accent-hover: #09A386;
 
-  --border: #F3F4F6;
+  --border: #1F332F;
 
   --font-sans: 'Outfit', sans-serif;
-  /* More friendly/rounded font */
+  /* Friendly/rounded font */
 
   --radius-sm: 0.5rem;
   --radius-md: 1rem;
@@ -41,7 +41,7 @@
 
 body {
   font-family: var(--font-sans);
-  background-color: #F9FAFB;
+  background-color: #050807;
   /* Outer background */
   color: var(--text-primary);
   line-height: 1.5;
@@ -64,7 +64,8 @@ input {
   max-width: 480px;
   margin: 0 auto;
   background-color: var(--bg-primary);
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   box-shadow: var(--shadow-lg);
@@ -87,7 +88,7 @@ input {
 
 .content {
   flex: 1;
-  padding: 1rem 1.5rem;
+  padding: 1rem 1.5rem 90px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -144,6 +145,9 @@ input {
   border-top: 1px solid var(--border);
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
   box-shadow: 0 -4px 6px -1px rgb(0 0 0 / 0.05);
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 
 .nav-item {
@@ -196,7 +200,7 @@ input[type=range]::-webkit-slider-thumb {
   height: 20px;
   width: 20px;
   border-radius: 50%;
-  background: #FFFFFF;
+  background: var(--bg-card);
   border: 2px solid var(--accent);
   cursor: pointer;
   margin-top: -8px;
@@ -207,10 +211,10 @@ input[type=range]::-webkit-slider-runnable-track {
   width: 100%;
   height: 4px;
   cursor: pointer;
-  background: #E5E7EB;
+  background: var(--border);
   border-radius: 2px;
 }
 
 input[type=range]:focus::-webkit-slider-runnable-track {
-  background: #D1FAE5;
+  background: var(--border);
 }
