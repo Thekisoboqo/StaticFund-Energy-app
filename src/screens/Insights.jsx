@@ -1,10 +1,11 @@
 import React from 'react';
 import { Clock, Thermometer, Lightbulb, Battery, ChevronRight } from 'lucide-react';
 
-const Insights = ({ devices }) => {
-    // Mock calculation for demo purposes to match wireframe
+const Insights = ({ devices, electricityRate }) => {
+    // Calculate total daily energy consumption in kWh
     const totalLoad = devices.reduce((acc, device) => acc + (device.watts * (device.hours || 0)), 0) / 1000;
-    const estBill = 150; // Hardcoded for demo match
+    // Calculate estimated monthly bill based on total load and electricity rate (assuming 30 days)
+    const estBill = Math.round(totalLoad * electricityRate * 30);
 
     return (
         <div>
@@ -38,6 +39,7 @@ const Insights = ({ devices }) => {
                         }}>
                             <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginBottom: '0.25rem' }}>Estimated<br />Monthly Bill:</div>
                             <div style={{ fontSize: '1.5rem', fontWeight: 800 }}>${estBill}</div>
+                            <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginTop: '0.25rem' }}>Total Load: {totalLoad.toFixed(2)} kWh/day</div>
                         </div>
                     </div>
 
