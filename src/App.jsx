@@ -31,14 +31,13 @@ function App() {
           <Inventory
             devices={devices}
             onAdd={addDevice}
-            onUpdate={updateDevice}
             onRemove={removeDevice}
           />
         );
       case 'audit':
         return <Audit devices={devices} onUpdate={updateDevice} onScreenChange={setActiveScreen} />;
       case 'insights':
-        return <Insights devices={devices} />;
+        return <Insights />;
       case 'settings':
         return (
           <div>
