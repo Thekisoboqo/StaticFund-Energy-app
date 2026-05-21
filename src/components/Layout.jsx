@@ -24,8 +24,8 @@ const Layout = ({ children, activeScreen, onScreenChange }) => {
                             className={`nav-item ${activeScreen === item.id ? 'active' : ''}`}
                             onClick={() => onScreenChange(item.id)}
                         >
-                            <Icon />
-                            <span>{item.label}</span>
+                            <Icon color={activeScreen === item.id ? 'var(--accent)' : 'var(--text-secondary)'} />
+                            <span style={{ color: activeScreen === item.id ? 'var(--accent)' : 'var(--text-secondary)' }}>{item.label}</span>
                         </button>
                     );
                 })}
