@@ -1,23 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap');
 
 :root {
-  /* Pastel Palette */
-  --bg-primary: #FFFBEB;
-  /* Cream */
-  --bg-card: #FFFFFF;
-  --bg-mint: #ECFDF5;
-  --bg-blue: #E0F2FE;
-  --bg-orange: #FEF3C7;
+  /* Privacy Filter Agent Dark Theme */
+  --bg-primary: #111C1A;
+  --bg-card: #1C2B29;
+  --bg-mint: #172422;
+  --bg-blue: #1A282A;
+  --bg-orange: #2A241A;
 
-  --text-primary: #1F2937;
-  --text-secondary: #6B7280;
-  --text-brand: #065F46;
-  /* Dark Mint */
+  --text-primary: #E5E7EB;
+  --text-secondary: #9CA3AF;
+  --text-brand: #0CD3AD;
 
-  --accent: #10B981;
-  --accent-hover: #059669;
+  --accent: #0CD3AD;
+  --accent-hover: #09A386;
 
-  --border: #F3F4F6;
+  --border: #2A3F3C;
 
   --font-sans: 'Outfit', sans-serif;
   /* More friendly/rounded font */
@@ -41,7 +39,7 @@
 
 body {
   font-family: var(--font-sans);
-  background-color: #F9FAFB;
+  background-color: #0A0F0E;
   /* Outer background */
   color: var(--text-primary);
   line-height: 1.5;
@@ -64,7 +62,8 @@ input {
   max-width: 480px;
   margin: 0 auto;
   background-color: var(--bg-primary);
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   box-shadow: var(--shadow-lg);
@@ -88,6 +87,7 @@ input {
 .content {
   flex: 1;
   padding: 1rem 1.5rem;
+  padding-bottom: 90px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -137,6 +137,9 @@ input {
 
 /* Navigation */
 .nav-bar {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
   display: flex;
   justify-content: space-around;
   padding: 1rem;
@@ -144,6 +147,7 @@ input {
   border-top: 1px solid var(--border);
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
   box-shadow: 0 -4px 6px -1px rgb(0 0 0 / 0.05);
+  z-index: 50;
 }
 
 .nav-item {
