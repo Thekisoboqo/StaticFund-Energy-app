@@ -50,7 +50,7 @@ const Audit = ({ devices, onUpdate, onScreenChange }) => {
                         </div>
 
                         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
-                            <Sun size={20} color="#F59E0B" />
+                            <Sun size={20} color="var(--color-sun)" />
                             <input
                                 type="range"
                                 min="0"
@@ -59,7 +59,7 @@ const Audit = ({ devices, onUpdate, onScreenChange }) => {
                                 value={device.hours || 0}
                                 onChange={(e) => handleHoursChange(device.id, e.target.value)}
                             />
-                            <Moon size={20} color="#6B7280" />
+                            <Moon size={20} color="var(--color-moon)" />
                         </div>
 
                         <div style={{
