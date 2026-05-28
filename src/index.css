@@ -1,36 +1,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap');
 
 :root {
-  /* Pastel Palette */
-  --bg-primary: #FFFBEB;
-  /* Cream */
-  --bg-card: #FFFFFF;
-  --bg-mint: #ECFDF5;
-  --bg-blue: #E0F2FE;
-  --bg-orange: #FEF3C7;
+  /* Privacy Filter Agent Dark Theme */
+  --bg-primary: #111C1A;
+  --bg-card: #1A2825;
+  --bg-mint: #233632;
+  --bg-blue: #1A2835;
+  --bg-orange: #35281A;
 
-  --text-primary: #1F2937;
-  --text-secondary: #6B7280;
-  --text-brand: #065F46;
-  /* Dark Mint */
+  --text-primary: #E2E8F0;
+  --text-secondary: #94A3B8;
+  --text-brand: #0CD3AD;
 
-  --accent: #10B981;
-  --accent-hover: #059669;
+  --accent: #0CD3AD;
+  --accent-hover: #089F82;
 
-  --border: #F3F4F6;
+  --border: #2D3748;
 
   --font-sans: 'Outfit', sans-serif;
-  /* More friendly/rounded font */
 
   --radius-sm: 0.5rem;
   --radius-md: 1rem;
-  /* More rounded */
   --radius-lg: 1.5rem;
   --radius-full: 9999px;
 
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.05), 0 4px 6px -2px rgb(0 0 0 / 0.05);
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.3), 0 2px 4px -2px rgb(0 0 0 / 0.3);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.3), 0 4px 6px -2px rgb(0 0 0 / 0.3);
 }
 
 * {
@@ -41,7 +37,7 @@
 
 body {
   font-family: var(--font-sans);
-  background-color: #F9FAFB;
+  background-color: #0A0F0E;
   /* Outer background */
   color: var(--text-primary);
   line-height: 1.5;
@@ -53,10 +49,12 @@ button {
   border: none;
   background: none;
   font-family: inherit;
+  color: inherit;
 }
 
 input {
   font-family: inherit;
+  color: var(--text-primary);
 }
 
 /* Utilities */
@@ -64,7 +62,8 @@ input {
   max-width: 480px;
   margin: 0 auto;
   background-color: var(--bg-primary);
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   box-shadow: var(--shadow-lg);
@@ -87,7 +86,7 @@ input {
 
 .content {
   flex: 1;
-  padding: 1rem 1.5rem;
+  padding: 1rem 1.5rem 90px 1.5rem;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -107,7 +106,7 @@ input {
 
 .btn-primary {
   background-color: var(--accent);
-  color: white;
+  color: #0A0F0E;
   box-shadow: var(--shadow-md);
 }
 
@@ -125,14 +124,14 @@ input {
 }
 
 .card-blue {
-  background: linear-gradient(135deg, #E0F2FE 0%, #BAE6FD 100%);
-  color: #0369A1;
+  background: linear-gradient(135deg, #1A2835 0%, #2A3845 100%);
+  color: #60A5FA;
   border: none;
 }
 
 .card-mint {
   background-color: var(--bg-mint);
-  border: 1px solid #D1FAE5;
+  border: 1px solid var(--border);
 }
 
 /* Navigation */
@@ -143,7 +142,10 @@ input {
   background-color: var(--bg-card);
   border-top: 1px solid var(--border);
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-  box-shadow: 0 -4px 6px -1px rgb(0 0 0 / 0.05);
+  box-shadow: 0 -4px 6px -1px rgb(0 0 0 / 0.3);
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 
 .nav-item {
