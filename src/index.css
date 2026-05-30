@@ -1,36 +1,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap');
 
 :root {
-  /* Pastel Palette */
-  --bg-primary: #FFFBEB;
-  /* Cream */
-  --bg-card: #FFFFFF;
-  --bg-mint: #ECFDF5;
-  --bg-blue: #E0F2FE;
-  --bg-orange: #FEF3C7;
+  /* Privacy Filter Agent Theme */
+  --bg-primary: #111C1A;
+  --bg-card: #182724;
+  --bg-mint: #1E332E;
+  --bg-blue: #142E3D;
+  --bg-orange: #3D2C14;
 
-  --text-primary: #1F2937;
-  --text-secondary: #6B7280;
-  --text-brand: #065F46;
-  /* Dark Mint */
+  --text-primary: #E5E7EB;
+  --text-secondary: #9CA3AF;
+  --text-brand: #0CD3AD;
 
-  --accent: #10B981;
-  --accent-hover: #059669;
+  --accent: #0CD3AD;
+  --accent-hover: #09A98A;
 
-  --border: #F3F4F6;
+  --border: #2A403A;
 
   --font-sans: 'Outfit', sans-serif;
-  /* More friendly/rounded font */
 
   --radius-sm: 0.5rem;
   --radius-md: 1rem;
-  /* More rounded */
   --radius-lg: 1.5rem;
   --radius-full: 9999px;
 
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.05), 0 4px 6px -2px rgb(0 0 0 / 0.05);
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -2px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.5);
 }
 
 * {
@@ -41,8 +37,7 @@
 
 body {
   font-family: var(--font-sans);
-  background-color: #F9FAFB;
-  /* Outer background */
+  background-color: #0A1110;
   color: var(--text-primary);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
@@ -64,11 +59,12 @@ input {
   max-width: 480px;
   margin: 0 auto;
   background-color: var(--bg-primary);
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   box-shadow: var(--shadow-lg);
   position: relative;
+  overflow: hidden;
 }
 
 .header {
@@ -87,7 +83,7 @@ input {
 
 .content {
   flex: 1;
-  padding: 1rem 1.5rem;
+  padding: 1rem 1.5rem 90px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -137,13 +133,17 @@ input {
 
 /* Navigation */
 .nav-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
   display: flex;
   justify-content: space-around;
   padding: 1rem;
   background-color: var(--bg-card);
   border-top: 1px solid var(--border);
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-  box-shadow: 0 -4px 6px -1px rgb(0 0 0 / 0.05);
+  box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.5);
 }
 
 .nav-item {
@@ -176,12 +176,13 @@ input {
   font-size: 1rem;
   outline: none;
   background-color: var(--bg-card);
+  color: var(--text-primary);
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .input-field:focus {
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+  box-shadow: 0 0 0 3px rgba(12, 211, 173, 0.1);
 }
 
 /* Range Slider */
@@ -196,7 +197,7 @@ input[type=range]::-webkit-slider-thumb {
   height: 20px;
   width: 20px;
   border-radius: 50%;
-  background: #FFFFFF;
+  background: var(--bg-card);
   border: 2px solid var(--accent);
   cursor: pointer;
   margin-top: -8px;
@@ -207,10 +208,10 @@ input[type=range]::-webkit-slider-runnable-track {
   width: 100%;
   height: 4px;
   cursor: pointer;
-  background: #E5E7EB;
+  background: var(--border);
   border-radius: 2px;
 }
 
 input[type=range]:focus::-webkit-slider-runnable-track {
-  background: #D1FAE5;
+  background: var(--bg-mint);
 }
