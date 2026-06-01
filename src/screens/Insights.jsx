@@ -1,10 +1,14 @@
 import React from 'react';
-import { Clock, Thermometer, Lightbulb, Battery, ChevronRight } from 'lucide-react';
+import { Clock, Thermometer, Lightbulb, Battery } from 'lucide-react';
 
 const Insights = ({ devices }) => {
-    // Mock calculation for demo purposes to match wireframe
+    // Dynamic calculation: Assuming electricity rate is $0.20 per kWh and 30 days per month
+    const RATE_PER_KWH = 0.20;
+    const DAYS = 30;
+
+    // totalLoad is in kW per day
     const totalLoad = devices.reduce((acc, device) => acc + (device.watts * (device.hours || 0)), 0) / 1000;
-    const estBill = 150; // Hardcoded for demo match
+    const estBill = (totalLoad * DAYS * RATE_PER_KWH).toFixed(2);
 
     return (
         <div>
