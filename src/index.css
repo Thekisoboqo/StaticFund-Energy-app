@@ -1,23 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap');
 
 :root {
-  /* Pastel Palette */
-  --bg-primary: #FFFBEB;
-  /* Cream */
-  --bg-card: #FFFFFF;
-  --bg-mint: #ECFDF5;
-  --bg-blue: #E0F2FE;
-  --bg-orange: #FEF3C7;
+  /* Privacy Filter Agent Dark Theme */
+  --bg-primary: #111C1A;
+  --bg-card: #1A2825;
+  --bg-mint: #172C27;
+  --bg-blue: #13242E;
+  --bg-orange: #2C2216;
 
-  --text-primary: #1F2937;
-  --text-secondary: #6B7280;
-  --text-brand: #065F46;
-  /* Dark Mint */
+  --text-primary: #F3F4F6;
+  --text-secondary: #9CA3AF;
+  --text-brand: #E5E7EB;
 
-  --accent: #10B981;
-  --accent-hover: #059669;
+  --accent: #0CD3AD;
+  --accent-hover: #08B091;
 
-  --border: #F3F4F6;
+  --border: #2A3F3A;
 
   --font-sans: 'Outfit', sans-serif;
   /* More friendly/rounded font */
@@ -41,7 +39,7 @@
 
 body {
   font-family: var(--font-sans);
-  background-color: #F9FAFB;
+  background-color: #0A0F0E;
   /* Outer background */
   color: var(--text-primary);
   line-height: 1.5;
@@ -64,7 +62,8 @@ input {
   max-width: 480px;
   margin: 0 auto;
   background-color: var(--bg-primary);
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   box-shadow: var(--shadow-lg);
@@ -87,7 +86,7 @@ input {
 
 .content {
   flex: 1;
-  padding: 1rem 1.5rem;
+  padding: 1rem 1.5rem 90px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -125,25 +124,29 @@ input {
 }
 
 .card-blue {
-  background: linear-gradient(135deg, #E0F2FE 0%, #BAE6FD 100%);
-  color: #0369A1;
-  border: none;
+  background: linear-gradient(135deg, var(--bg-blue) 0%, var(--bg-mint) 100%);
+  color: var(--accent);
+  border: 1px solid var(--border);
 }
 
 .card-mint {
   background-color: var(--bg-mint);
-  border: 1px solid #D1FAE5;
+  border: 1px solid var(--border);
 }
 
 /* Navigation */
 .nav-bar {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
   display: flex;
   justify-content: space-around;
   padding: 1rem;
   background-color: var(--bg-card);
   border-top: 1px solid var(--border);
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-  box-shadow: 0 -4px 6px -1px rgb(0 0 0 / 0.05);
+  box-shadow: 0 -4px 6px -1px rgb(0 0 0 / 0.5);
+  z-index: 50;
 }
 
 .nav-item {
