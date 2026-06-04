@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Camera, ChevronRight, Refrigerator, Tv, Zap, CheckCircle } from 'lucide-react';
 
-const Inventory = ({ devices, onAdd, onUpdate, onRemove }) => {
+const Inventory = ({ devices, onAdd, onRemove }) => {
     const [name, setName] = useState('');
     const [watts, setWatts] = useState('');
     const [isAdding, setIsAdding] = useState(false);
@@ -88,12 +88,12 @@ const Inventory = ({ devices, onAdd, onUpdate, onRemove }) => {
                             <div style={{
                                 width: '48px',
                                 height: '48px',
-                                backgroundColor: '#FEF3C7',
+                                backgroundColor: 'var(--bg-orange)',
                                 borderRadius: '12px',
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
-                                color: '#D97706'
+                                color: 'var(--text-brand)'
                             }}>
                                 {getIcon(device.name)}
                             </div>
@@ -125,7 +125,7 @@ const Inventory = ({ devices, onAdd, onUpdate, onRemove }) => {
                     <span>Profile Completeness: <span style={{ color: 'var(--text-primary)' }}>Good Start!</span></span>
                     <CheckCircle size={16} color="var(--accent)" />
                 </div>
-                <div style={{ width: '100%', height: '8px', backgroundColor: '#E5E7EB', borderRadius: '4px', overflow: 'hidden' }}>
+                <div style={{ width: '100%', height: '8px', backgroundColor: 'var(--border)', borderRadius: '4px', overflow: 'hidden' }}>
                     <div style={{ width: '60%', height: '100%', backgroundColor: 'var(--accent)', borderRadius: '4px' }} />
                 </div>
             </div>
