@@ -33,7 +33,7 @@ const Audit = ({ devices, onUpdate, onScreenChange }) => {
                             <div style={{
                                 width: '40px',
                                 height: '40px',
-                                backgroundColor: 'white',
+                                backgroundColor: 'var(--bg-card)',
                                 borderRadius: '8px',
                                 display: 'flex',
                                 alignItems: 'center',
