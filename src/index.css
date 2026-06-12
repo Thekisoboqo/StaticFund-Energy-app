@@ -1,23 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap');
 
 :root {
-  /* Pastel Palette */
-  --bg-primary: #FFFBEB;
-  /* Cream */
-  --bg-card: #FFFFFF;
-  --bg-mint: #ECFDF5;
-  --bg-blue: #E0F2FE;
-  --bg-orange: #FEF3C7;
+  /* Privacy Filter Agent Dark Theme */
+  --bg-primary: #111C1A;
+  --bg-card: #1A2E2A;
+  --bg-mint: #153A33;
+  --bg-blue: #1A3644;
+  --bg-orange: #4A3A15;
 
-  --text-primary: #1F2937;
-  --text-secondary: #6B7280;
-  --text-brand: #065F46;
-  /* Dark Mint */
+  --text-primary: #E2E8F0;
+  --text-secondary: #94A3B8;
+  --text-brand: #0CD3AD;
 
-  --accent: #10B981;
-  --accent-hover: #059669;
+  --accent: #0CD3AD;
+  --accent-hover: #0AAB8C;
 
-  --border: #F3F4F6;
+  --border: #2A423D;
 
   --font-sans: 'Outfit', sans-serif;
   /* More friendly/rounded font */
@@ -41,7 +39,7 @@
 
 body {
   font-family: var(--font-sans);
-  background-color: #F9FAFB;
+  background-color: #0A1110;
   /* Outer background */
   color: var(--text-primary);
   line-height: 1.5;
@@ -64,7 +62,8 @@ input {
   max-width: 480px;
   margin: 0 auto;
   background-color: var(--bg-primary);
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   box-shadow: var(--shadow-lg);
@@ -88,6 +87,7 @@ input {
 .content {
   flex: 1;
   padding: 1rem 1.5rem;
+  padding-bottom: 90px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -144,6 +144,11 @@ input {
   border-top: 1px solid var(--border);
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
   box-shadow: 0 -4px 6px -1px rgb(0 0 0 / 0.05);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
 }
 
 .nav-item {
