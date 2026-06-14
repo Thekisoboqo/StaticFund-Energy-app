@@ -4,7 +4,8 @@ import { Clock, Thermometer, Lightbulb, Battery, ChevronRight } from 'lucide-rea
 const Insights = ({ devices }) => {
     // Mock calculation for demo purposes to match wireframe
     const totalLoad = devices.reduce((acc, device) => acc + (device.watts * (device.hours || 0)), 0) / 1000;
-    const estBill = 150; // Hardcoded for demo match
+    // Base cost plus rate per kWh (mock logic for demo)
+    const estBill = Math.round(50 + (totalLoad * 0.15) * 30);
 
     return (
         <div>
