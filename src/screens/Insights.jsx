@@ -1,11 +1,11 @@
 import React from 'react';
-import { Clock, Thermometer, Lightbulb, Battery, ChevronRight } from 'lucide-react';
+import { Clock, Thermometer, Lightbulb, Battery } from 'lucide-react';
 
-const Insights = ({ devices }) => {
+const Insights = ({ devices, elecRate }) => {
     // Mock calculation for demo purposes to match wireframe
     const totalLoad = devices.reduce((acc, device) => acc + (device.watts * (device.hours || 0)), 0) / 1000;
-    // Base cost plus rate per kWh (mock logic for demo)
-    const estBill = Math.round(50 + (totalLoad * 0.15) * 30);
+    // Base cost plus dynamic rate per kWh
+    const estBill = Math.round(50 + (totalLoad * elecRate) * 30);
 
     return (
         <div>
