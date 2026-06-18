@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import Layout from './components/Layout';
-import Inventory from './screens/Inventory';
-import Audit from './screens/Audit';
-import Insights from './screens/Insights';
+
+// Lazy loading screens
+const Inventory = lazy(() => import('./screens/Inventory'));
+const Audit = lazy(() => import('./screens/Audit'));
+const Insights = lazy(() => import('./screens/Insights'));
+const Settings = lazy(() => import('./screens/Settings'));
 
 const INITIAL_DEVICES = [
   { id: 1, name: 'Living Room Heater', watts: 1500, hours: 0 },
@@ -44,6 +47,10 @@ function App() {
     setDevices(devices.filter(d => d.id !== id));
   };
 
+  const resetDevices = () => {
+    setDevices(INITIAL_DEVICES);
+  }
+
   const renderScreen = () => {
     switch (activeScreen) {
       case 'inventory':
@@ -60,23 +67,17 @@ function App() {
       case 'insights':
         return <Insights devices={devices} />;
       case 'settings':
-        return (
-          <div>
-            <div className="header">Settings</div>
-            <div style={{ padding: '1rem' }}>
-              <h2>Settings</h2>
-              <p>App settings will go here.</p>
-            </div>
-          </div>
-        );
+        return <Settings resetDevices={resetDevices} />;
       default:
-        return <Inventory />;
+        return <Inventory devices={devices} onAdd={addDevice} onUpdate={updateDevice} onRemove={removeDevice} />;
     }
   };
 
   return (
     <Layout activeScreen={activeScreen} onScreenChange={setActiveScreen}>
-      {renderScreen()}
+      <Suspense fallback={<div style={{ padding: '2rem', textAlign: 'center', color: 'var(--text-brand)' }}>Loading...</div>}>
+        {renderScreen()}
+      </Suspense>
     </Layout>
   );
 }

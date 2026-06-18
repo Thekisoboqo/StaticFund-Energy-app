@@ -1,11 +1,21 @@
 import React from 'react';
-import { Clock, Thermometer, Lightbulb, Battery, ChevronRight } from 'lucide-react';
+import { Clock, Thermometer, Lightbulb, Battery } from 'lucide-react';
 
 const Insights = ({ devices }) => {
-    // Mock calculation for demo purposes to match wireframe
+    // Read the user's rate from localStorage, fallback to 0.15
+    const getRate = () => {
+        try {
+            const stored = localStorage.getItem('electricityRate');
+            return stored ? parseFloat(stored) : 0.15;
+        } catch {
+            return 0.15;
+        }
+    };
+
+    const rate = getRate();
     const totalLoad = devices.reduce((acc, device) => acc + (device.watts * (device.hours || 0)), 0) / 1000;
-    // Base cost plus rate per kWh (mock logic for demo)
-    const estBill = Math.round(50 + (totalLoad * 0.15) * 30);
+    // Base cost plus dynamically loaded rate per kWh
+    const estBill = Math.round(50 + (totalLoad * rate) * 30);
 
     return (
         <div>
