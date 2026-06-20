@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import Layout from './components/Layout';
-import Inventory from './screens/Inventory';
-import Audit from './screens/Audit';
-import Insights from './screens/Insights';
+
+const Inventory = lazy(() => import('./screens/Inventory'));
+const Audit = lazy(() => import('./screens/Audit'));
+const Insights = lazy(() => import('./screens/Insights'));
+const Settings = lazy(() => import('./screens/Settings'));
 
 const INITIAL_DEVICES = [
   { id: 1, name: 'Living Room Heater', watts: 1500, hours: 0 },
@@ -10,8 +12,35 @@ const INITIAL_DEVICES = [
   { id: 3, name: 'Microwave', watts: 200, hours: 0 },
 ];
 
+const INITIAL_SETTINGS = {
+  electricityRate: 0.15,
+  inverterCapacity: 5,
+  batteryCapacity: 10,
+  agentMemory: true,
+  notificationsEnabled: false,
+};
+
 function App() {
   const [activeScreen, setActiveScreen] = useState('inventory');
+
+  const [settings, setSettings] = useState(() => {
+    try {
+      const stored = localStorage.getItem('settings');
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (parsed && typeof parsed === 'object') {
+          return { ...INITIAL_SETTINGS, ...parsed };
+        }
+      }
+    } catch (e) {
+      console.error('Error parsing settings from localStorage', e);
+    }
+    return INITIAL_SETTINGS;
+  });
+
+  useEffect(() => {
+    localStorage.setItem('settings', JSON.stringify(settings));
+  }, [settings]);
 
   const [devices, setDevices] = useState(() => {
     try {
@@ -44,6 +73,11 @@ function App() {
     setDevices(devices.filter(d => d.id !== id));
   };
 
+  const clearData = () => {
+    setDevices(INITIAL_DEVICES);
+    setSettings(INITIAL_SETTINGS);
+  };
+
   const renderScreen = () => {
     switch (activeScreen) {
       case 'inventory':
@@ -58,25 +92,19 @@ function App() {
       case 'audit':
         return <Audit devices={devices} onUpdate={updateDevice} onScreenChange={setActiveScreen} />;
       case 'insights':
-        return <Insights devices={devices} />;
+        return <Insights devices={devices} settings={settings} />;
       case 'settings':
-        return (
-          <div>
-            <div className="header">Settings</div>
-            <div style={{ padding: '1rem' }}>
-              <h2>Settings</h2>
-              <p>App settings will go here.</p>
-            </div>
-          </div>
-        );
+        return <Settings settings={settings} setSettings={setSettings} onClearData={clearData} />;
       default:
-        return <Inventory />;
+        return <Inventory devices={devices} onAdd={addDevice} onUpdate={updateDevice} onRemove={removeDevice} />;
     }
   };
 
   return (
     <Layout activeScreen={activeScreen} onScreenChange={setActiveScreen}>
-      {renderScreen()}
+      <Suspense fallback={<div style={{ padding: '1.5rem', color: 'var(--text-secondary)' }}>Loading...</div>}>
+        {renderScreen()}
+      </Suspense>
     </Layout>
   );
 }
