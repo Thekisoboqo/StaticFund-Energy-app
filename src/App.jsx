@@ -3,6 +3,7 @@ import Layout from './components/Layout';
 import Inventory from './screens/Inventory';
 import Audit from './screens/Audit';
 import Insights from './screens/Insights';
+import Settings from './screens/Settings';
 
 const INITIAL_DEVICES = [
   { id: 1, name: 'Living Room Heater', watts: 1500, hours: 0 },
@@ -12,6 +13,27 @@ const INITIAL_DEVICES = [
 
 function App() {
   const [activeScreen, setActiveScreen] = useState('inventory');
+
+  const INITIAL_SETTINGS = { ratePerKwh: 0.15, baseCost: 50, inverterCapacity: 5.0, batteryCapacity: 10.0, notificationsEnabled: true, agentMemoryEnabled: true };
+
+  const [settings, setSettings] = useState(() => {
+    try {
+      const stored = localStorage.getItem('settings');
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (parsed !== null && typeof parsed === 'object' && !Array.isArray(parsed)) {
+          return { ...INITIAL_SETTINGS, ...parsed };
+        }
+      }
+    } catch (e) {
+      console.error('Error parsing settings from localStorage', e);
+    }
+    return INITIAL_SETTINGS;
+  });
+
+  useEffect(() => {
+    localStorage.setItem('settings', JSON.stringify(settings));
+  }, [settings]);
 
   const [devices, setDevices] = useState(() => {
     try {
@@ -58,17 +80,10 @@ function App() {
       case 'audit':
         return <Audit devices={devices} onUpdate={updateDevice} onScreenChange={setActiveScreen} />;
       case 'insights':
-        return <Insights devices={devices} />;
+        return <Insights devices={devices} settings={settings} />;
       case 'settings':
-        return (
-          <div>
-            <div className="header">Settings</div>
-            <div style={{ padding: '1rem' }}>
-              <h2>Settings</h2>
-              <p>App settings will go here.</p>
-            </div>
-          </div>
-        );
+        return <Settings settings={settings} onUpdateSettings={setSettings} />;
+
       default:
         return <Inventory />;
     }
