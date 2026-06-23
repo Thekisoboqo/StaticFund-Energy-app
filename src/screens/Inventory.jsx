@@ -88,12 +88,12 @@ const Inventory = ({ devices, onAdd, onRemove }) => {
                             <div style={{
                                 width: '48px',
                                 height: '48px',
-                                backgroundColor: '#FEF3C7',
+                                backgroundColor: 'var(--bg-mint)',
                                 borderRadius: '12px',
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
-                                color: '#D97706'
+                                color: 'var(--accent)'
                             }}>
                                 {getIcon(device.name)}
                             </div>
@@ -125,7 +125,7 @@ const Inventory = ({ devices, onAdd, onRemove }) => {
                     <span>Profile Completeness: <span style={{ color: 'var(--text-primary)' }}>Good Start!</span></span>
                     <CheckCircle size={16} color="var(--accent)" />
                 </div>
-                <div style={{ width: '100%', height: '8px', backgroundColor: '#E5E7EB', borderRadius: '4px', overflow: 'hidden' }}>
+                <div style={{ width: '100%', height: '8px', backgroundColor: 'var(--bg-mint)', borderRadius: '4px', overflow: 'hidden' }}>
                     <div style={{ width: '60%', height: '100%', backgroundColor: 'var(--accent)', borderRadius: '4px' }} />
                 </div>
             </div>
