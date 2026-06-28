@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import Layout from './components/Layout';
-import Inventory from './screens/Inventory';
-import Audit from './screens/Audit';
-import Insights from './screens/Insights';
+
+const Inventory = React.lazy(() => import('./screens/Inventory'));
+const Audit = React.lazy(() => import('./screens/Audit'));
+const Insights = React.lazy(() => import('./screens/Insights'));
 
 const INITIAL_DEVICES = [
   { id: 1, name: 'Living Room Heater', watts: 1500, hours: 0 },
@@ -48,17 +49,27 @@ function App() {
     switch (activeScreen) {
       case 'inventory':
         return (
-          <Inventory
-            devices={devices}
-            onAdd={addDevice}
-            onUpdate={updateDevice}
-            onRemove={removeDevice}
-          />
+          <Suspense fallback={<div>Loading...</div>}>
+            <Inventory
+              devices={devices}
+              onAdd={addDevice}
+              onUpdate={updateDevice}
+              onRemove={removeDevice}
+            />
+          </Suspense>
         );
       case 'audit':
-        return <Audit devices={devices} onUpdate={updateDevice} onScreenChange={setActiveScreen} />;
+        return (
+          <Suspense fallback={<div>Loading...</div>}>
+            <Audit devices={devices} onUpdate={updateDevice} onScreenChange={setActiveScreen} />
+          </Suspense>
+        );
       case 'insights':
-        return <Insights devices={devices} />;
+        return (
+          <Suspense fallback={<div>Loading...</div>}>
+            <Insights devices={devices} />
+          </Suspense>
+        );
       case 'settings':
         return (
           <div>
@@ -70,7 +81,11 @@ function App() {
           </div>
         );
       default:
-        return <Inventory />;
+        return (
+          <Suspense fallback={<div>Loading...</div>}>
+            <Inventory />
+          </Suspense>
+        );
     }
   };
 

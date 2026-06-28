@@ -46,10 +46,10 @@ const Inventory = ({ devices, onAdd, onRemove }) => {
                         onClick={() => setIsAdding(true)}
                     >
                         {/* Decorative circle */}
-                        <div style={{ position: 'absolute', top: '-20px', right: '-20px', width: '100px', height: '100px', borderRadius: '50%', background: 'rgba(255,255,255,0.2)' }} />
+                        <div style={{ position: 'absolute', top: '-20px', right: '-20px', width: '100px', height: '100px', borderRadius: '50%', background: 'rgba(255,255,255,0.1)' }} />
 
-                        <div style={{ background: 'rgba(255,255,255,0.3)', padding: '1rem', borderRadius: '50%', marginBottom: '1rem' }}>
-                            <Camera size={32} color="#0369A1" />
+                        <div style={{ background: 'var(--bg-blue)', padding: '1rem', borderRadius: '50%', marginBottom: '1rem' }}>
+                            <Camera size={32} color="var(--accent)" />
                         </div>
                         <span style={{ fontWeight: 600, fontSize: '1.125rem' }}>Scan a new appliance</span>
                     </div>
@@ -88,12 +88,12 @@ const Inventory = ({ devices, onAdd, onRemove }) => {
                             <div style={{
                                 width: '48px',
                                 height: '48px',
-                                backgroundColor: '#FEF3C7',
+                                backgroundColor: 'var(--bg-orange)',
                                 borderRadius: '12px',
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
-                                color: '#D97706'
+                                color: 'var(--accent)'
                             }}>
                                 {getIcon(device.name)}
                             </div>
@@ -125,7 +125,7 @@ const Inventory = ({ devices, onAdd, onRemove }) => {
                     <span>Profile Completeness: <span style={{ color: 'var(--text-primary)' }}>Good Start!</span></span>
                     <CheckCircle size={16} color="var(--accent)" />
                 </div>
-                <div style={{ width: '100%', height: '8px', backgroundColor: '#E5E7EB', borderRadius: '4px', overflow: 'hidden' }}>
+                <div style={{ width: '100%', height: '8px', backgroundColor: 'var(--bg-blue)', borderRadius: '4px', overflow: 'hidden' }}>
                     <div style={{ width: '60%', height: '100%', backgroundColor: 'var(--accent)', borderRadius: '4px' }} />
                 </div>
             </div>
