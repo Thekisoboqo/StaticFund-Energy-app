@@ -23,14 +23,13 @@ const Inventory = ({ devices, onAdd, onRemove }) => {
     };
 
     return (
-        <div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             <div className="header">My Home's Devices</div>
             <div className="sub-header">Let's build your energy profile together.</div>
 
-            <div style={{ padding: '0 1.5rem 1.5rem' }}>
-                {/* Scan Card */}
-                {!isAdding ? (
-                    <div
+            {/* Scan Card */}
+            {!isAdding ? (
+                <div
                         className="card card-blue"
                         style={{
                             height: '180px',
@@ -103,12 +102,11 @@ const Inventory = ({ devices, onAdd, onRemove }) => {
                                 <div style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>{device.watts}W</div>
                             </div>
 
-                            <button onClick={() => onRemove(device.id)} style={{ color: 'var(--text-secondary)' }}>
-                                <ChevronRight size={20} />
-                            </button>
-                        </div>
-                    ))}
-                </div>
+                        <button onClick={() => onRemove(device.id)} style={{ color: 'var(--text-secondary)' }}>
+                            <ChevronRight size={20} />
+                        </button>
+                    </div>
+                ))}
             </div>
 
             {/* Footer / Progress */}
@@ -117,6 +115,7 @@ const Inventory = ({ devices, onAdd, onRemove }) => {
                 bottom: 0,
                 backgroundColor: 'var(--bg-card)',
                 padding: '1.5rem',
+                margin: '0 -1.5rem',
                 borderTop: '1px solid var(--border)',
                 borderRadius: 'var(--radius-lg) var(--radius-lg) 0 0',
                 boxShadow: '0 -4px 6px -1px rgb(0 0 0 / 0.05)'

@@ -1,20 +1,19 @@
 import React from 'react';
 import { Clock, Thermometer, Lightbulb, Battery, ChevronRight } from 'lucide-react';
 
-const Insights = ({ devices }) => {
+const Insights = ({ devices, rate }) => {
     // Mock calculation for demo purposes to match wireframe
     const totalLoad = devices.reduce((acc, device) => acc + (device.watts * (device.hours || 0)), 0) / 1000;
     // Base cost plus rate per kWh (mock logic for demo)
-    const estBill = Math.round(50 + (totalLoad * 0.15) * 30);
+    const estBill = Math.round(50 + (totalLoad * rate) * 30);
 
     return (
-        <div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             <div className="header">Your Personal Energy Plan</div>
             <div className="sub-header">Actionable steps to save money.</div>
 
-            <div className="content">
-                {/* Donut Chart Section */}
-                <div style={{ display: 'flex', justifyContent: 'center', margin: '2rem 0', position: 'relative' }}>
+            {/* Donut Chart Section */}
+            <div style={{ display: 'flex', justifyContent: 'center', margin: '2rem 0', position: 'relative' }}>
                     <div style={{
                         width: '200px',
                         height: '200px',
@@ -114,21 +113,20 @@ const Insights = ({ devices }) => {
                     </div>
                 </div>
 
-                {/* Goal Card */}
-                <div className="card" style={{ display: 'flex', gap: '1rem', alignItems: 'center', marginTop: '1rem' }}>
-                    <div style={{ position: 'relative' }}>
-                        <Sun size={32} color="#F59E0B" />
-                        <div style={{ position: 'absolute', bottom: -5, right: -5, background: '#10B981', borderRadius: '50%', padding: '2px' }}>
-                            <Battery size={12} color="white" />
-                        </div>
+            {/* Goal Card */}
+            <div className="card" style={{ display: 'flex', gap: '1rem', alignItems: 'center', marginTop: '1rem' }}>
+                <div style={{ position: 'relative' }}>
+                    <Sun size={32} color="#F59E0B" />
+                    <div style={{ position: 'absolute', bottom: -5, right: -5, background: '#10B981', borderRadius: '50%', padding: '2px' }}>
+                        <Battery size={12} color="white" />
                     </div>
-                    <div style={{ flex: 1 }}>
-                        <div style={{ fontWeight: 700, fontSize: '0.875rem' }}>Long-Term Goal: Energy Independence</div>
-                        <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginTop: '0.25rem' }}>
-                            Your Ideal Solar Setup: 5kW System + 10kWh Battery. Invest for lifetime savings.
-                        </div>
-                        <button style={{ marginTop: '0.5rem', fontSize: '0.75rem', fontWeight: 700, textDecoration: 'underline' }}>Learn More</button>
+                </div>
+                <div style={{ flex: 1 }}>
+                    <div style={{ fontWeight: 700, fontSize: '0.875rem' }}>Long-Term Goal: Energy Independence</div>
+                    <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginTop: '0.25rem' }}>
+                        Your Ideal Solar Setup: 5kW System + 10kWh Battery. Invest for lifetime savings.
                     </div>
+                    <button style={{ marginTop: '0.5rem', fontSize: '0.75rem', fontWeight: 700, textDecoration: 'underline' }}>Learn More</button>
                 </div>
             </div>
         </div>

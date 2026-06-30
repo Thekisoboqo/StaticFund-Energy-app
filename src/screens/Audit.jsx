@@ -22,13 +22,12 @@ const Audit = ({ devices, onUpdate, onScreenChange }) => {
     };
 
     return (
-        <div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             <div className="header">Daily Habits</div>
             <div className="sub-header">Tell us how you use your devices.</div>
 
-            <div className="content">
-                {devices.map((device) => (
-                    <div key={device.id} className="card card-mint" style={{ padding: '1.5rem' }}>
+            {devices.map((device) => (
+                <div key={device.id} className="card card-mint" style={{ padding: '1.5rem' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
                             <div style={{
                                 width: '40px',
@@ -78,14 +77,13 @@ const Audit = ({ devices, onUpdate, onScreenChange }) => {
                     </div>
                 ))}
 
-                <button
-                    className="btn btn-primary"
-                    style={{ marginTop: '1rem', width: '100%', fontSize: '1.125rem' }}
-                    onClick={() => onScreenChange && onScreenChange('insights')} // Assuming onScreenChange is passed or handled via Layout
-                >
-                    See My Savings Plan
-                </button>
-            </div>
+            <button
+                className="btn btn-primary"
+                style={{ marginTop: '1rem', width: '100%', fontSize: '1.125rem' }}
+                onClick={() => onScreenChange && onScreenChange('insights')} // Assuming onScreenChange is passed or handled via Layout
+            >
+                See My Savings Plan
+            </button>
         </div>
     );
 };
