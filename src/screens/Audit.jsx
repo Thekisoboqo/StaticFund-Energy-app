@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sun, Moon, Info, Refrigerator, Tv, Zap } from 'lucide-react';
+import { Sun, Moon, Info, Refrigerator, Tv, Zap, Heater, Microwave } from 'lucide-react';
 
 const Audit = ({ devices, onUpdate, onScreenChange }) => {
     const handleHoursChange = (id, hours) => {
@@ -10,6 +10,8 @@ const Audit = ({ devices, onUpdate, onScreenChange }) => {
         const lower = name.toLowerCase();
         if (lower.includes('fridge')) return <Refrigerator size={24} />;
         if (lower.includes('tv')) return <Tv size={24} />;
+        if (lower.includes('heater')) return <Heater size={24} />;
+        if (lower.includes('microwave')) return <Microwave size={24} />;
         return <Zap size={24} />;
     };
 

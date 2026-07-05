@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Camera, ChevronRight, Refrigerator, Tv, Zap, CheckCircle } from 'lucide-react';
+import { Camera, ChevronRight, Refrigerator, Tv, Zap, CheckCircle, Heater, Microwave } from 'lucide-react';
 
 const Inventory = ({ devices, onAdd, onRemove }) => {
     const [name, setName] = useState('');
@@ -19,6 +19,8 @@ const Inventory = ({ devices, onAdd, onRemove }) => {
         const lower = name.toLowerCase();
         if (lower.includes('fridge')) return <Refrigerator size={24} />;
         if (lower.includes('tv')) return <Tv size={24} />;
+        if (lower.includes('heater')) return <Heater size={24} />;
+        if (lower.includes('microwave')) return <Microwave size={24} />;
         return <Zap size={24} />;
     };
 

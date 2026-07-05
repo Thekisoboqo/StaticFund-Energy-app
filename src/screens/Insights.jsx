@@ -1,11 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Clock, Thermometer, Lightbulb, Battery, ChevronRight } from 'lucide-react';
 
 const Insights = ({ devices }) => {
+    const [electricityRate] = useState(() => {
+        try {
+            const storedRate = localStorage.getItem('electricityRate');
+            return storedRate ? parseFloat(storedRate) : 0.15;
+        } catch (e) {
+            console.error("Error reading from localStorage", e);
+            return 0.15;
+        }
+    });
+
+    const [inverterSize] = useState(() => {
+        try {
+            const storedInverter = localStorage.getItem('inverterSize');
+            return storedInverter ? parseInt(storedInverter) : 5000;
+        } catch (e) {
+            console.error("Error reading from localStorage", e);
+            return 5000;
+        }
+    });
+
     // Mock calculation for demo purposes to match wireframe
     const totalLoad = devices.reduce((acc, device) => acc + (device.watts * (device.hours || 0)), 0) / 1000;
-    // Base cost plus rate per kWh (mock logic for demo)
-    const estBill = Math.round(50 + (totalLoad * 0.15) * 30);
+    // Base cost plus rate per kWh
+    const estBill = Math.round(50 + (totalLoad * electricityRate) * 30);
 
     return (
         <div>
@@ -125,7 +145,7 @@ const Insights = ({ devices }) => {
                     <div style={{ flex: 1 }}>
                         <div style={{ fontWeight: 700, fontSize: '0.875rem' }}>Long-Term Goal: Energy Independence</div>
                         <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginTop: '0.25rem' }}>
-                            Your Ideal Solar Setup: 5kW System + 10kWh Battery. Invest for lifetime savings.
+                            Your Ideal Solar Setup: {inverterSize / 1000}kW System + {Math.max(10, Math.round((inverterSize / 1000) * 2))}kWh Battery. Invest for lifetime savings.
                         </div>
                         <button style={{ marginTop: '0.5rem', fontSize: '0.75rem', fontWeight: 700, textDecoration: 'underline' }}>Learn More</button>
                     </div>
