@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import Layout from './components/Layout';
-import Inventory from './screens/Inventory';
-import Audit from './screens/Audit';
-import Insights from './screens/Insights';
+
+const Inventory = lazy(() => import('./screens/Inventory'));
+const Audit = lazy(() => import('./screens/Audit'));
+const Insights = lazy(() => import('./screens/Insights'));
 
 const INITIAL_DEVICES = [
   { id: 1, name: 'Living Room Heater', watts: 1500, hours: 0 },
@@ -76,7 +77,9 @@ function App() {
 
   return (
     <Layout activeScreen={activeScreen} onScreenChange={setActiveScreen}>
-      {renderScreen()}
+      <Suspense fallback={<div style={{ padding: '2rem', textAlign: 'center' }}>Loading...</div>}>
+        {renderScreen()}
+      </Suspense>
     </Layout>
   );
 }
