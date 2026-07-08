@@ -26,19 +26,19 @@ const Audit = ({ devices, onUpdate, onScreenChange }) => {
             <div className="header">Daily Habits</div>
             <div className="sub-header">Tell us how you use your devices.</div>
 
-            <div className="content">
+            <div>
                 {devices.map((device) => (
-                    <div key={device.id} className="card card-mint" style={{ padding: '1.5rem' }}>
+                    <div key={device.id} className="card card-mint" style={{ padding: '1.5rem', marginBottom: '1rem' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
                             <div style={{
                                 width: '40px',
                                 height: '40px',
-                                backgroundColor: 'white',
+                                backgroundColor: 'var(--text-primary)',
                                 borderRadius: '8px',
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
-                                color: 'var(--text-brand)',
+                                color: 'var(--bg-primary)',
                                 boxShadow: 'var(--shadow-sm)'
                             }}>
                                 {getIcon(device.name)}
@@ -50,7 +50,7 @@ const Audit = ({ devices, onUpdate, onScreenChange }) => {
                         </div>
 
                         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
-                            <Sun size={20} color="#F59E0B" />
+                            <Sun size={20} color="var(--status-amber-icon)" />
                             <input
                                 type="range"
                                 min="0"
@@ -59,7 +59,7 @@ const Audit = ({ devices, onUpdate, onScreenChange }) => {
                                 value={device.hours || 0}
                                 onChange={(e) => handleHoursChange(device.id, e.target.value)}
                             />
-                            <Moon size={20} color="#6B7280" />
+                            <Moon size={20} color="var(--status-gray)" />
                         </div>
 
                         <div style={{
