@@ -3,6 +3,8 @@ import react from '@vitejs/plugin-react'
 
 // https://vite.dev/config/
 export default defineConfig({
+  // Required for GitHub Pages project site: https://thekisoboqo.github.io/StaticFund-Energy-app/
+  base: '/StaticFund-Energy-app/',
   plugins: [react()],
   build: {
     rollupOptions: {
