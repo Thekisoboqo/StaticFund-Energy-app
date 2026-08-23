@@ -19,6 +19,21 @@
 
   --border: #2C3E3A;
 
+  /* Status Colors */
+  --status-blue-bg: #1E3A8A;
+  --status-blue-text: #60A5FA;
+  --status-blue-icon: #3B82F6;
+  --status-red-bg: #7F1D1D;
+  --status-red-text: #F87171;
+  --status-amber-bg: #78350F;
+  --status-amber-text: #FBBF24;
+  --status-amber-icon: #F59E0B;
+  --status-emerald-bg: #064E3B;
+  --status-emerald-text: #34D399;
+  --status-emerald-icon: #10B981;
+  --status-gray: #6B7280;
+  --status-gray-light: #374151;
+
   --font-sans: 'Outfit', sans-serif;
 
   --radius-sm: 0.5rem;
