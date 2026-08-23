@@ -1,11 +1,13 @@
 import React, { useMemo, useState, useEffect } from 'react';
-import { Clock, Thermometer, Lightbulb, Battery, ChevronRight, Sun } from 'lucide-react';
-import { loadRateRPerKwh, DEFAULT_RATE_R_PER_KWH, RATE_STORAGE_KEY } from './Settings';
+import { Clock, Thermometer, Lightbulb, Battery, Sun } from 'lucide-react';
+import { loadRateRPerKwh, DEFAULT_RATE_R_PER_KWH } from './Settings';
 
 const formatRand = (amount) => {
   const n = Math.max(0, Math.round(amount));
   return `R${n.toLocaleString('en-ZA')}`;
 };
+
+const formatRate = (rate) => `R${Number(rate).toFixed(2)}`;
 
 const Insights = ({ devices }) => {
   const [rateRPerKwh, setRateRPerKwh] = useState(loadRateRPerKwh);
@@ -20,12 +22,12 @@ const Insights = ({ devices }) => {
     };
   }, []);
 
-  // Re-read when navigating back to this screen (same-tab localStorage writes don't fire storage)
+  // Re-read when navigating back (same-tab localStorage writes don't fire `storage`)
   useEffect(() => {
     setRateRPerKwh(loadRateRPerKwh());
   }, [devices]);
 
-  const { dailyKwh, monthlyKwh, estBill, categories, tips } = useMemo(() => {
+  const { monthlyKwh, estBill, categories, tips } = useMemo(() => {
     const byCategory = { Heating: 0, Cooking: 0, Other: 0 };
 
     const categorize = (name = '') => {
@@ -52,7 +54,6 @@ const Insights = ({ devices }) => {
       Object.entries(byCategory).map(([k, wh]) => [k, (wh / 1000) * 30 * rateRPerKwh])
     );
 
-    // Rough opportunity estimates as % of bill — honest placeholders until habits/agent data exists
     const tipDefs = [
       {
         id: 1,
@@ -84,7 +85,6 @@ const Insights = ({ devices }) => {
     ];
 
     return {
-      dailyKwh: daily,
       monthlyKwh: monthly,
       estBill: bill,
       categories: categoryRand,
@@ -97,7 +97,6 @@ const Insights = ({ devices }) => {
 
   const heatingPct = pct(categories.Heating);
   const cookingPct = pct(categories.Cooking);
-  const otherPct = Math.max(0, 100 - heatingPct - cookingPct);
 
   const donut = `conic-gradient(var(--status-amber-text) 0% ${heatingPct}%, var(--status-emerald-text) ${heatingPct}% ${heatingPct + cookingPct}%, var(--status-blue-text) ${heatingPct + cookingPct}% 100%)`;
 
@@ -105,7 +104,7 @@ const Insights = ({ devices }) => {
     <div>
       <div className="header">Your Personal Energy Plan</div>
       <div className="sub-header">
-        At {formatRand(rateRPerKwh)}/kWh · ~{monthlyKwh.toFixed(0)} kWh/mo from your devices
+        At {formatRate(rateRPerKwh)}/kWh · ~{monthlyKwh.toFixed(0)} kWh/mo from your devices
       </div>
 
       <div>
@@ -160,8 +159,7 @@ const Insights = ({ devices }) => {
         </div>
 
         <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginBottom: '1rem', textAlign: 'center' }}>
-          Rate editable in Settings (default R{DEFAULT_RATE_R_PER_KWH.toFixed(2)} municipal mid-band).
-          Key: {RATE_STORAGE_KEY}
+          Change your rate in Settings (default {formatRate(DEFAULT_RATE_R_PER_KWH)} municipal mid-band).
         </div>
 
         <h3 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '1rem' }}>Top Savings Opportunities</h3>
