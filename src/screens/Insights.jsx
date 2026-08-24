@@ -1,6 +1,6 @@
 import React, { useMemo, useState, useEffect } from 'react';
 import { Clock, Thermometer, Lightbulb, Battery, Sun } from 'lucide-react';
-import { loadRateRPerKwh, DEFAULT_RATE_R_PER_KWH } from './Settings';
+import { loadRateRPerKwh, DEFAULT_RATE_R_PER_KWH } from '../utils/constants';
 
 const formatRand = (amount) => {
   const n = Math.max(0, Math.round(amount));
@@ -10,7 +10,7 @@ const formatRand = (amount) => {
 const formatRate = (rate) => `R${Number(rate).toFixed(2)}`;
 
 const Insights = ({ devices }) => {
-  const [rateRPerKwh, setRateRPerKwh] = useState(loadRateRPerKwh);
+  const [rateRPerKwh, setRateRPerKwh] = useState(() => loadRateRPerKwh());
 
   useEffect(() => {
     const sync = () => setRateRPerKwh(loadRateRPerKwh());
@@ -21,11 +21,6 @@ const Insights = ({ devices }) => {
       window.removeEventListener('focus', sync);
     };
   }, []);
-
-  // Re-read when navigating back (same-tab localStorage writes don't fire `storage`)
-  useEffect(() => {
-    setRateRPerKwh(loadRateRPerKwh());
-  }, [devices]);
 
   const { monthlyKwh, estBill, categories, tips } = useMemo(() => {
     const byCategory = { Heating: 0, Cooking: 0, Other: 0 };
