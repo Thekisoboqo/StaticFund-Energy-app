@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Camera, ChevronRight, Refrigerator, Tv, Zap, CheckCircle } from 'lucide-react';
+import { useState } from 'preact/hooks';
+import { Camera, ChevronRight, Refrigerator, Tv, Zap, CheckCircle } from 'lucide-preact';
 
 const Inventory = ({ devices, onAdd, onRemove }) => {
     const [name, setName] = useState('');
