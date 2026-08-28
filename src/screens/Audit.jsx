@@ -1,5 +1,5 @@
-import React from 'react';
-import { Sun, Moon, Info, Refrigerator, Tv, Zap } from 'lucide-react';
+
+import { Sun, Moon, Info, Refrigerator, Tv, Zap } from 'lucide-preact';
 
 const Audit = ({ devices, onUpdate, onScreenChange }) => {
     const handleHoursChange = (id, hours) => {
@@ -66,7 +66,7 @@ const Audit = ({ devices, onUpdate, onScreenChange }) => {
                             display: 'flex',
                             alignItems: 'center',
                             gap: '0.5rem',
-                            backgroundColor: 'rgba(255,255,255,0.6)',
+                            backgroundColor: 'var(--bg-card)',
                             padding: '0.5rem 0.75rem',
                             borderRadius: 'var(--radius-sm)',
                             fontSize: '0.75rem',
