@@ -1,5 +1,5 @@
-import React from 'react';
-import { Briefcase, Search, BarChart3, Settings } from 'lucide-react';
+
+import { Briefcase, Search, BarChart3, Settings } from 'lucide-preact';
 
 const Layout = ({ children, activeScreen, onScreenChange }) => {
     const navItems = [

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Camera, ChevronRight, Refrigerator, Tv, Zap, CheckCircle } from 'lucide-react';
+import { useState } from 'preact/compat';
+import { Camera, ChevronRight, Refrigerator, Tv, Zap, CheckCircle } from 'lucide-preact';
 
 const Inventory = ({ devices, onAdd, onRemove }) => {
     const [name, setName] = useState('');
@@ -46,9 +46,9 @@ const Inventory = ({ devices, onAdd, onRemove }) => {
                         onClick={() => setIsAdding(true)}
                     >
                         {/* Decorative circle */}
-                        <div style={{ position: 'absolute', top: '-20px', right: '-20px', width: '100px', height: '100px', borderRadius: '50%', background: 'rgba(255,255,255,0.2)' }} />
+                        <div style={{ position: 'absolute', top: '-20px', right: '-20px', width: '100px', height: '100px', borderRadius: '50%', background: 'var(--bg-mint)' }} />
 
-                        <div style={{ background: 'rgba(255,255,255,0.3)', padding: '1rem', borderRadius: '50%', marginBottom: '1rem' }}>
+                        <div style={{ background: 'var(--bg-primary)', padding: '1rem', borderRadius: '50%', marginBottom: '1rem', zIndex: 1 }}>
                             <Camera size={32} color="var(--status-blue-icon)" />
                         </div>
                         <span style={{ fontWeight: 600, fontSize: '1.125rem' }}>Scan a new appliance</span>

@@ -1,23 +1,5 @@
-import React, { useState, useEffect } from 'react';
-
-/** Default: mid-band municipal prepaid (e.g. City Power Joburg). Eskom Homelight direct is lower (~R2.71). */
-export const DEFAULT_RATE_R_PER_KWH = 3.2;
-export const RATE_STORAGE_KEY = 'settings_rate_r_per_kwh';
-
-export function loadRateRPerKwh() {
-  try {
-    const stored = localStorage.getItem(RATE_STORAGE_KEY);
-    if (stored !== null) {
-      const parsed = JSON.parse(stored);
-      if (typeof parsed === 'number' && Number.isFinite(parsed) && parsed > 0) {
-        return parsed;
-      }
-    }
-  } catch (e) {
-    console.error('Error parsing rate from localStorage', e);
-  }
-  return DEFAULT_RATE_R_PER_KWH;
-}
+import { useState, useEffect } from 'preact/compat';
+import { DEFAULT_RATE_R_PER_KWH, RATE_STORAGE_KEY, loadRateRPerKwh } from '../utils/constants';
 
 const Settings = () => {
   const [notificationsEnabled, setNotificationsEnabled] = useState(() => {
@@ -38,7 +20,12 @@ const Settings = () => {
   const [rateInput, setRateInput] = useState(() => String(loadRateRPerKwh()));
 
   useEffect(() => {
-    localStorage.setItem('settings_notifications', JSON.stringify(notificationsEnabled));
+    const newValue = JSON.stringify(notificationsEnabled);
+    localStorage.setItem('settings_notifications', newValue);
+    window.dispatchEvent(new StorageEvent('storage', {
+      key: 'settings_notifications',
+      newValue
+    }));
   }, [notificationsEnabled]);
 
   const commitRate = (raw) => {
@@ -49,8 +36,13 @@ const Settings = () => {
       return;
     }
     const rounded = Math.round(value * 100) / 100;
-    localStorage.setItem(RATE_STORAGE_KEY, JSON.stringify(rounded));
+    const newValue = JSON.stringify(rounded);
+    localStorage.setItem(RATE_STORAGE_KEY, newValue);
     setRateInput(String(rounded));
+    window.dispatchEvent(new StorageEvent('storage', {
+      key: RATE_STORAGE_KEY,
+      newValue
+    }));
   };
 
   return (
