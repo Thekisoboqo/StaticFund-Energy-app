@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense, lazy } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'preact/compat';
 import Layout from './components/Layout';
 
 const Inventory = lazy(() => import('./screens/Inventory'));
