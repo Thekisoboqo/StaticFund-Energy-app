@@ -1,5 +1,4 @@
-import React from 'react';
-import { Sun, Moon, Info, Refrigerator, Tv, Zap } from 'lucide-react';
+import { Sun, Moon, Info, Refrigerator, Tv, Zap } from 'lucide-preact';
 
 const Audit = ({ devices, onUpdate, onScreenChange }) => {
     const handleHoursChange = (id, hours) => {
