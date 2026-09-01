@@ -1,6 +1,6 @@
-import React, { useMemo, useState, useEffect } from 'react';
-import { Clock, Thermometer, Lightbulb, Battery, Sun } from 'lucide-react';
-import { loadRateRPerKwh, DEFAULT_RATE_R_PER_KWH } from './Settings';
+import { useMemo, useState, useEffect } from 'preact/compat';
+import { Clock, Thermometer, Lightbulb, Battery, Sun } from 'lucide-preact';
+import { loadRateRPerKwh, DEFAULT_RATE_R_PER_KWH } from '../utils/constants';
 
 const formatRand = (amount) => {
   const n = Math.max(0, Math.round(amount));
