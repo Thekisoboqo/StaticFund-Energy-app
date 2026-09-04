@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense, lazy } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'preact/compat';
 import Layout from './components/Layout';
 
 const Inventory = lazy(() => import('./screens/Inventory'));
@@ -31,7 +31,9 @@ function App() {
   });
 
   useEffect(() => {
-    localStorage.setItem('devices', JSON.stringify(devices));
+    const stringified = JSON.stringify(devices);
+    localStorage.setItem('devices', stringified);
+    window.dispatchEvent(new StorageEvent('storage', { key: 'devices', newValue: stringified }));
   }, [devices]);
 
   const addDevice = (device) => {
